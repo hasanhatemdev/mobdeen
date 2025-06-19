@@ -6,11 +6,18 @@ import Subscriptions from "./components/Subscriptions";
 import Profile from "./components/Profile";
 import PaymentSuccess from "./components/PaymentSuccess";
 import PaymentFailed from "./components/PaymentFailed";
+import ForgotPassword from "./components/ForgotPassword";
+import VerifyOTP from "./components/VerifyOTP";
+import ResetPassword from "./components/ResetPassword";
+import { useAuth } from "./hooks/useAuth";
 import "./App.css";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    // Use the auth hook to handle token refresh
+    useAuth();
 
     useEffect(() => {
         // Check if user is authenticated on component mount
@@ -34,6 +41,9 @@ function App() {
             <div className='App'>
                 <Routes>
                     <Route path='/login' element={<Login />} />
+                    <Route path='/forgot-password' element={<ForgotPassword />} />
+                    <Route path='/verify-otp' element={<VerifyOTP />} />
+                    <Route path='/reset-password' element={<ResetPassword />} />
                     <Route
                         path='/subscriptions'
                         element={
