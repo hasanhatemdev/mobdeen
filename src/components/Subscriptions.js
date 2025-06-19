@@ -55,12 +55,21 @@ function Subscriptions() {
             // Debug: Check if we have checkout URL
             console.log("Checkout URL:", subscriptionResponse.checkout_url);
 
-            // Redirect to Stripe checkout
+            // Redirect to Stripe checkout with custom success/cancel URLs
             if (subscriptionResponse.checkout_url) {
+                // Parse the URL and add our custom return URLs
+                const checkoutUrl = new URL(subscriptionResponse.checkout_url);
+
+                // Set success URL to redirect to app link first
+                checkoutUrl.searchParams.set("success_url", "https://mobdeen.app.link/successful-payment");
+
+                // Set cancel URL to redirect to app link first
+                checkoutUrl.searchParams.set("cancel_url", "https://mobdeen.app.link/failed-payment");
+
                 // Add a small delay to ensure state is saved
                 setTimeout(() => {
-                    console.log("Redirecting to:", subscriptionResponse.checkout_url);
-                    window.location.href = subscriptionResponse.checkout_url;
+                    console.log("Redirecting to:", checkoutUrl.toString());
+                    window.location.href = checkoutUrl.toString();
                 }, 100);
 
                 // Prevent any further code execution

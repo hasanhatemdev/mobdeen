@@ -6,6 +6,7 @@ import Subscriptions from "./components/Subscriptions";
 import Profile from "./components/Profile";
 import PaymentSuccess from "./components/PaymentSuccess";
 import PaymentFailed from "./components/PaymentFailed";
+import PaymentRedirect from "./components/PaymentRedirect";
 import ForgotPassword from "./components/ForgotPassword";
 import VerifyOTP from "./components/VerifyOTP";
 import ResetPassword from "./components/ResetPassword";
@@ -62,6 +63,7 @@ function App() {
                     />
                     <Route path='/payment-success' element={<PaymentSuccess />} />
                     <Route path='/payment-failed' element={<PaymentFailed />} />
+                    <Route path='/payment-redirect/:status' element={<PaymentRedirect />} />
                     <Route path='/' element={<Navigate to='/login' />} />
                 </Routes>
             </div>
