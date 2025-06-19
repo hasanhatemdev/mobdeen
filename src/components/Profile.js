@@ -21,7 +21,7 @@ function Profile() {
 
     const getRoleInArabic = (role) => {
         const roles = {
-            adult: "بالغ",
+            adult: "أب",
             child: "طفل",
             admin: "مسؤول",
         };

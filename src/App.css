@@ -399,3 +399,207 @@ button:disabled {
     margin-bottom: 20px;
     text-align: center;
 }
+
+/* Subscription Tabs */
+.subscription-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #666;
+    border-radius: 0;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    margin-bottom: -2px;
+}
+
+.tab-button:hover {
+    color: #333;
+    background-color: transparent;
+}
+
+.tab-button.active {
+    color: #ebbd00;
+    border-bottom-color: #ebbd00;
+    background-color: transparent;
+}
+
+.tab-content {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Active Subscription Card */
+.active-subscription-card {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.subscription-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.subscription-header h3 {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 28px;
+}
+
+.paid-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.subscription-details {
+    margin-bottom: 30px;
+}
+
+.expiry-info {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.subscription-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.upgrade-btn {
+    background: linear-gradient(135deg, #ebbd00 0%, #d0a705 100%);
+    flex: 1;
+}
+
+.upgrade-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(235, 189, 0, 0.3);
+}
+
+.cancel-btn {
+    background-color: #fff;
+    color: #dc3545;
+    border: 2px solid #dc3545;
+    flex: 1;
+}
+
+.cancel-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* No Subscription */
+.no-subscription {
+    text-align: center;
+    padding: 60px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.no-subscription p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Upgrade Plans Specific */
+.current-plan {
+    position: relative;
+    opacity: 0.7;
+}
+
+.current-plan-badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.new-feature {
+    position: relative;
+    font-weight: 600;
+}
+
+.new-badge {
+    background: #ff6b6b;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    margin-right: 8px;
+    font-weight: 600;
+}
+
+/* Feature list improvements */
+.features ul li {
+    padding: 8px 0;
+    transition: all 0.2s;
+}
+
+.features ul li:hover {
+    transform: translateX(-5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .subscription-tabs {
+        justify-content: center;
+    }
+
+    .tab-button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    .active-subscription-card {
+        padding: 20px;
+    }
+
+    .subscription-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .subscription-actions {
+        flex-direction: column;
+    }
+}

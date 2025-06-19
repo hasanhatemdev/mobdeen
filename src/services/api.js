@@ -196,6 +196,11 @@ export const subscriptionService = {
         const response = await api.get("/api/v1/family-subscriptions");
         return response.data;
     },
+
+    getCurrentSubscriptionFeatures: async () => {
+        const response = await api.get("/api/v1/family-subscription/features");
+        return response.data;
+    },
 };
 
 export default api;
