@@ -85,26 +85,15 @@ function Login() {
                         </div>
                     </div>
 
+                    <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                        <p onClick={() => navigate("/forgot-password")} className='forgot-password-link'>
+                            نسيت كلمة المرور؟
+                        </p>
+                    </div>
+
                     <button type='submit' disabled={loading}>
                         {loading ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
                     </button>
-
-                    <div style={{ marginTop: "20px", textAlign: "center" }}>
-                        <button
-                            type='button'
-                            onClick={() => navigate("/forgot-password")}
-                            style={{
-                                background: "none",
-                                border: "none",
-                                color: "#0066cc",
-                                cursor: "pointer",
-                                fontSize: "14px",
-                                textDecoration: "underline",
-                            }}
-                        >
-                            نسيت كلمة المرور؟
-                        </button>
-                    </div>
                 </form>
             </div>
         </div>

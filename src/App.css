@@ -54,6 +54,13 @@ body {
     color: #1a1a1a;
 }
 
+.forgot-password-link {
+    font-size: 14px;
+    color: #7b6300;
+    text-align: right;
+    cursor: pointer;
+}
+
 .form-group {
     margin-bottom: 20px;
 }

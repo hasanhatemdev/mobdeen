@@ -140,12 +140,14 @@ export const authService = {
     },
 
     resetPassword: async (newPassword, resetToken) => {
-        const response = await api.post(
-            "/api/v1/users/reset-password",
+        // Use axios directly to bypass the interceptor
+        const response = await axios.post(
+            `${API_BASE_URL}/api/v1/users/reset-password`,
             { new_password: newPassword },
             {
                 headers: {
                     Authorization: `Bearer ${resetToken}`,
+                    "Content-Type": "application/json",
                 },
             }
         );

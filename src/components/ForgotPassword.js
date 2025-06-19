@@ -88,10 +88,9 @@ function ForgotPassword() {
                         style={{
                             background: "none",
                             border: "none",
-                            color: "#0066cc",
+                            color: "#7B6300",
                             cursor: "pointer",
                             fontSize: "14px",
-                            textDecoration: "underline",
                         }}
                     >
                         العودة إلى تسجيل الدخول
