@@ -1,4 +1,3 @@
-// src/hooks/useAuth.js
 import { useEffect, useRef } from "react";
 import { authService } from "../services/api";
 

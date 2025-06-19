@@ -1,4 +1,3 @@
-// src/components/PaymentRedirect.js
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";

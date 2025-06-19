@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
@@ -10,6 +9,10 @@ import PaymentRedirect from "./components/PaymentRedirect";
 import ForgotPassword from "./components/ForgotPassword";
 import VerifyOTP from "./components/VerifyOTP";
 import ResetPassword from "./components/ResetPassword";
+import HomePage from "./components/HomePage";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import WebsiteHeader from "./components/WebsiteHeader";
+import Footer from "./components/Footer";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { useAuth } from "./hooks/useAuth";
@@ -35,6 +38,23 @@ function App() {
         return token ? children : <Navigate to='/login' />;
     };
 
+    // Layout for public pages (with header and footer)
+    const PublicLayout = ({ children }) => (
+        <>
+            <WebsiteHeader />
+            <main className='main-content'>{children}</main>
+            <Footer />
+        </>
+    );
+
+    // Layout for app pages (with language switcher only)
+    const AppLayout = ({ children }) => (
+        <>
+            <LanguageSwitcher />
+            {children}
+        </>
+    );
+
     if (loading) {
         return <div className='loading'>Loading...</div>;
     }
@@ -43,17 +63,65 @@ function App() {
         <LanguageProvider>
             <Router>
                 <div className='App'>
-                    <LanguageSwitcher />
                     <Routes>
-                        <Route path='/login' element={<Login />} />
-                        <Route path='/forgot-password' element={<ForgotPassword />} />
-                        <Route path='/verify-otp' element={<VerifyOTP />} />
-                        <Route path='/reset-password' element={<ResetPassword />} />
+                        {/* Public Website Routes */}
+                        <Route
+                            path='/'
+                            element={
+                                <PublicLayout>
+                                    <HomePage />
+                                </PublicLayout>
+                            }
+                        />
+                        <Route
+                            path='/privacy-policy'
+                            element={
+                                <PublicLayout>
+                                    <PrivacyPolicy />
+                                </PublicLayout>
+                            }
+                        />
+
+                        {/* App Routes */}
+                        <Route
+                            path='/login'
+                            element={
+                                <AppLayout>
+                                    <Login />
+                                </AppLayout>
+                            }
+                        />
+                        <Route
+                            path='/forgot-password'
+                            element={
+                                <AppLayout>
+                                    <ForgotPassword />
+                                </AppLayout>
+                            }
+                        />
+                        <Route
+                            path='/verify-otp'
+                            element={
+                                <AppLayout>
+                                    <VerifyOTP />
+                                </AppLayout>
+                            }
+                        />
+                        <Route
+                            path='/reset-password'
+                            element={
+                                <AppLayout>
+                                    <ResetPassword />
+                                </AppLayout>
+                            }
+                        />
                         <Route
                             path='/subscriptions'
                             element={
                                 <ProtectedRoute>
-                                    <Subscriptions />
+                                    <AppLayout>
+                                        <Subscriptions />
+                                    </AppLayout>
                                 </ProtectedRoute>
                             }
                         />
@@ -61,14 +129,36 @@ function App() {
                             path='/profile'
                             element={
                                 <ProtectedRoute>
-                                    <Profile />
+                                    <AppLayout>
+                                        <Profile />
+                                    </AppLayout>
                                 </ProtectedRoute>
                             }
                         />
-                        <Route path='/payment-success' element={<PaymentSuccess />} />
-                        <Route path='/payment-failed' element={<PaymentFailed />} />
-                        <Route path='/payment-redirect/:status' element={<PaymentRedirect />} />
-                        <Route path='/' element={<Navigate to='/login' />} />
+                        <Route
+                            path='/payment-success'
+                            element={
+                                <AppLayout>
+                                    <PaymentSuccess />
+                                </AppLayout>
+                            }
+                        />
+                        <Route
+                            path='/payment-failed'
+                            element={
+                                <AppLayout>
+                                    <PaymentFailed />
+                                </AppLayout>
+                            }
+                        />
+                        <Route
+                            path='/payment-redirect/:status'
+                            element={
+                                <AppLayout>
+                                    <PaymentRedirect />
+                                </AppLayout>
+                            }
+                        />
                     </Routes>
                 </div>
             </Router>
