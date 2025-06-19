@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services/api";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function VerifyOTP() {
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { t } = useLanguage();
 
     const email = sessionStorage.getItem("reset_email");
 
@@ -32,7 +34,7 @@ function VerifyOTP() {
             // Navigate to reset password page
             navigate("/reset-password");
         } catch (err) {
-            setError(err.response?.data?.message || "رمز التحقق غير صحيح. يرجى المحاولة مرة أخرى.");
+            setError(err.response?.data?.message || t("invalidCode"));
         } finally {
             setLoading(false);
         }
@@ -45,16 +47,16 @@ function VerifyOTP() {
                     <img src='/images/logo.png' alt='Logo' />
                 </div>
 
-                <h2>إدخال رمز التحقق</h2>
-                <p style={{ textAlign: "center", color: "#666", marginBottom: "20px" }}>
-                    تم إرسال رمز التحقق إلى {email}
+                <h2>{t("enterVerificationCode")}</h2>
+                <p className='center-text' style={{ color: "#666", marginBottom: "20px" }}>
+                    {t("verificationCodeSentTo")} {email}
                 </p>
 
                 {error && <div className='error-message'>{error}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div className='form-group'>
-                        <label htmlFor='otp'>رمز التحقق</label>
+                        <label htmlFor='otp'>{t("verificationCode")}</label>
                         <div className='input-with-icon'>
                             <img src='/images/icons/lock.svg' alt='Lock' />
                             <input
@@ -64,7 +66,7 @@ function VerifyOTP() {
                                 value={otp}
                                 onChange={(e) => setOtp(e.target.value)}
                                 required
-                                placeholder='أدخل رمز التحقق'
+                                placeholder={t("enterCode")}
                                 dir='ltr'
                                 maxLength='6'
                                 pattern='[0-9]{6}'
@@ -74,7 +76,7 @@ function VerifyOTP() {
                     </div>
 
                     <button type='submit' disabled={loading}>
-                        {loading ? "جاري التحقق..." : "تحقق من الرمز"}
+                        {loading ? t("verifying") : t("verify")}
                     </button>
                 </form>
 
@@ -90,7 +92,7 @@ function VerifyOTP() {
                             textDecoration: "underline",
                         }}
                     >
-                        إعادة إرسال الرمز
+                        {t("resendCode")}
                     </button>
                 </div>
             </div>

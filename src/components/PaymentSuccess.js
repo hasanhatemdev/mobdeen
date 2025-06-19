@@ -1,17 +1,19 @@
 // src/components/PaymentSuccess.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function PaymentSuccess() {
     const navigate = useNavigate();
+    const { t } = useLanguage();
 
     return (
         <div className='payment-result-container'>
             <div className='result-card success'>
                 <div className='icon'>✓</div>
-                <h2>تمت عملية الدفع بنجاح!</h2>
-                <p>تم تفعيل اشتراكك بنجاح.</p>
-                <button onClick={() => navigate("/profile")}>الذهاب إلى الملف الشخصي</button>
+                <h2>{t("paymentSuccessful")}</h2>
+                <p>{t("subscriptionActivated")}</p>
+                <button onClick={() => navigate("/profile")}>{t("goToProfile")}</button>
             </div>
         </div>
     );

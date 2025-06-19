@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services/api";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function ResetPassword() {
     const [password, setPassword] = useState("");
@@ -10,6 +11,7 @@ function ResetPassword() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
+    const { t } = useLanguage();
 
     const resetToken = sessionStorage.getItem("reset_token");
 
@@ -27,14 +29,14 @@ function ResetPassword() {
 
         // Validate passwords match
         if (password !== confirmPassword) {
-            setError("كلمات المرور غير متطابقة");
+            setError(t("passwordsDoNotMatch"));
             setLoading(false);
             return;
         }
 
         // Validate password strength
         if (password.length < 6) {
-            setError("يجب أن تكون كلمة المرور 6 أحرف على الأقل");
+            setError(t("passwordTooShort"));
             setLoading(false);
             return;
         }
@@ -52,7 +54,7 @@ function ResetPassword() {
                 navigate("/login");
             }, 2000);
         } catch (err) {
-            setError(err.response?.data?.message || "فشل في إعادة تعيين كلمة المرور. يرجى المحاولة مرة أخرى.");
+            setError(err.response?.data?.message || t("passwordResetFailed"));
         } finally {
             setLoading(false);
         }
@@ -65,28 +67,14 @@ function ResetPassword() {
                     <img src='/images/logo.png' alt='Logo' />
                 </div>
 
-                <h2>إعادة تعيين كلمة المرور</h2>
+                <h2>{t("resetPassword")}</h2>
 
                 {error && <div className='error-message'>{error}</div>}
-                {success && (
-                    <div
-                        className='success-message'
-                        style={{
-                            backgroundColor: "#d4edda",
-                            color: "#155724",
-                            padding: "12px",
-                            borderRadius: "4px",
-                            marginBottom: "20px",
-                            textAlign: "center",
-                        }}
-                    >
-                        تم تغيير كلمة المرور بنجاح!
-                    </div>
-                )}
+                {success && <div className='success-message'>{t("passwordChangedSuccessfully")}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div className='form-group'>
-                        <label htmlFor='password'>كلمة المرور الجديدة</label>
+                        <label htmlFor='password'>{t("newPassword")}</label>
                         <div className='input-with-icon'>
                             <img src='/images/icons/lock.svg' alt='Lock' />
                             <input
@@ -96,14 +84,14 @@ function ResetPassword() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
-                                placeholder='أدخل كلمة المرور الجديدة'
+                                placeholder={t("enterNewPassword")}
                                 dir='ltr'
                             />
                         </div>
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor='confirmPassword'>تأكيد كلمة المرور</label>
+                        <label htmlFor='confirmPassword'>{t("confirmPassword")}</label>
                         <div className='input-with-icon'>
                             <img src='/images/icons/lock.svg' alt='Lock' />
                             <input
@@ -113,14 +101,14 @@ function ResetPassword() {
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
-                                placeholder='أعد إدخال كلمة المرور'
+                                placeholder={t("reenterPassword")}
                                 dir='ltr'
                             />
                         </div>
                     </div>
 
                     <button type='submit' disabled={loading || success}>
-                        {loading ? "جاري التحديث..." : "تحديث كلمة المرور"}
+                        {loading ? t("updating") : t("updatePassword")}
                     </button>
                 </form>
             </div>

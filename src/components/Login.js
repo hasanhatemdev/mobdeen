@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services/api";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Login() {
     const [credentials, setCredentials] = useState({
@@ -11,6 +12,7 @@ function Login() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { t, language } = useLanguage();
 
     const handleChange = (e) => {
         setCredentials({
@@ -36,7 +38,7 @@ function Login() {
             // Redirect to subscriptions page
             navigate("/subscriptions");
         } catch (err) {
-            setError(err.response?.data?.message || "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.");
+            setError(err.response?.data?.message || t("loginFailed"));
         } finally {
             setLoading(false);
         }
@@ -46,15 +48,16 @@ function Login() {
         <div className='login-container'>
             <div className='login-form'>
                 <div className='login-logo'>
-                    <img src='/images/logo.png' />
+                    <img src='/images/logo.png' alt='Logo' />
                 </div>
+                <h2>{t("login")}</h2>
                 {error && <div className='error-message'>{error}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div className='form-group'>
-                        <label htmlFor='email'>البريد الإلكتروني</label>
+                        <label htmlFor='email'>{t("email")}</label>
                         <div className='input-with-icon'>
-                            <img src='/images/icons/email.svg' />
+                            <img src='/images/icons/email.svg' alt='Email' />
                             <input
                                 type='email'
                                 id='email'
@@ -62,16 +65,16 @@ function Login() {
                                 value={credentials.email}
                                 onChange={handleChange}
                                 required
-                                placeholder='أدخل بريدك الإلكتروني'
+                                placeholder={t("enterEmail")}
                                 dir='ltr'
                             />
                         </div>
                     </div>
 
                     <div className='form-group'>
-                        <label htmlFor='password'>كلمة المرور</label>
+                        <label htmlFor='password'>{t("password")}</label>
                         <div className='input-with-icon'>
-                            <img src='/images/icons/lock.svg' />
+                            <img src='/images/icons/lock.svg' alt='Lock' />
                             <input
                                 type='password'
                                 id='password'
@@ -79,7 +82,7 @@ function Login() {
                                 value={credentials.password}
                                 onChange={handleChange}
                                 required
-                                placeholder='أدخل كلمة المرور'
+                                placeholder={t("enterPassword")}
                                 dir='ltr'
                             />
                         </div>
@@ -87,12 +90,12 @@ function Login() {
 
                     <div style={{ marginBottom: "20px", textAlign: "center" }}>
                         <p onClick={() => navigate("/forgot-password")} className='forgot-password-link'>
-                            نسيت كلمة المرور؟
+                            {t("forgotPassword")}
                         </p>
                     </div>
 
                     <button type='submit' disabled={loading}>
-                        {loading ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
+                        {loading ? t("loggingIn") : t("login")}
                     </button>
                 </form>
             </div>

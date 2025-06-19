@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services/api";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function ForgotPassword() {
     const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ function ForgotPassword() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
+    const { t } = useLanguage();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,7 +29,7 @@ function ForgotPassword() {
                 navigate("/verify-otp");
             }, 2000);
         } catch (err) {
-            setError(err.response?.data?.message || "فشل في إرسال رمز التحقق. يرجى المحاولة مرة أخرى.");
+            setError(err.response?.data?.message || t("failedToSend"));
         } finally {
             setLoading(false);
         }
@@ -40,28 +42,14 @@ function ForgotPassword() {
                     <img src='/images/logo.png' alt='Logo' />
                 </div>
 
-                <h2>استعادة كلمة المرور</h2>
+                <h2>{t("passwordRecovery")}</h2>
 
                 {error && <div className='error-message'>{error}</div>}
-                {success && (
-                    <div
-                        className='success-message'
-                        style={{
-                            backgroundColor: "#d4edda",
-                            color: "#155724",
-                            padding: "12px",
-                            borderRadius: "4px",
-                            marginBottom: "20px",
-                            textAlign: "center",
-                        }}
-                    >
-                        تم إرسال رمز التحقق إلى بريدك الإلكتروني
-                    </div>
-                )}
+                {success && <div className='success-message'>{t("verificationCodeSent")}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div className='form-group'>
-                        <label htmlFor='email'>البريد الإلكتروني</label>
+                        <label htmlFor='email'>{t("email")}</label>
                         <div className='input-with-icon'>
                             <img src='/images/icons/email.svg' alt='Email' />
                             <input
@@ -71,14 +59,14 @@ function ForgotPassword() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                placeholder='أدخل بريدك الإلكتروني'
+                                placeholder={t("enterEmail")}
                                 dir='ltr'
                             />
                         </div>
                     </div>
 
                     <button type='submit' disabled={loading}>
-                        {loading ? "جاري الإرسال..." : "إرسال رمز التحقق"}
+                        {loading ? t("sending") : t("sendVerificationCode")}
                     </button>
                 </form>
 
@@ -93,7 +81,7 @@ function ForgotPassword() {
                             fontSize: "14px",
                         }}
                     >
-                        العودة إلى تسجيل الدخول
+                        {t("backToLogin")}
                     </button>
                 </div>
             </div>

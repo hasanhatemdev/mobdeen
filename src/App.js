@@ -10,6 +10,8 @@ import PaymentRedirect from "./components/PaymentRedirect";
 import ForgotPassword from "./components/ForgotPassword";
 import VerifyOTP from "./components/VerifyOTP";
 import ResetPassword from "./components/ResetPassword";
+import LanguageSwitcher from "./components/LanguageSwitcher";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import { useAuth } from "./hooks/useAuth";
 import "./App.css";
 
@@ -34,40 +36,43 @@ function App() {
     };
 
     if (loading) {
-        return <div className='loading'>جاري التحميل...</div>;
+        return <div className='loading'>Loading...</div>;
     }
 
     return (
-        <Router>
-            <div className='App'>
-                <Routes>
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/forgot-password' element={<ForgotPassword />} />
-                    <Route path='/verify-otp' element={<VerifyOTP />} />
-                    <Route path='/reset-password' element={<ResetPassword />} />
-                    <Route
-                        path='/subscriptions'
-                        element={
-                            <ProtectedRoute>
-                                <Subscriptions />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path='/profile'
-                        element={
-                            <ProtectedRoute>
-                                <Profile />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route path='/payment-success' element={<PaymentSuccess />} />
-                    <Route path='/payment-failed' element={<PaymentFailed />} />
-                    <Route path='/payment-redirect/:status' element={<PaymentRedirect />} />
-                    <Route path='/' element={<Navigate to='/login' />} />
-                </Routes>
-            </div>
-        </Router>
+        <LanguageProvider>
+            <Router>
+                <div className='App'>
+                    <LanguageSwitcher />
+                    <Routes>
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/forgot-password' element={<ForgotPassword />} />
+                        <Route path='/verify-otp' element={<VerifyOTP />} />
+                        <Route path='/reset-password' element={<ResetPassword />} />
+                        <Route
+                            path='/subscriptions'
+                            element={
+                                <ProtectedRoute>
+                                    <Subscriptions />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path='/profile'
+                            element={
+                                <ProtectedRoute>
+                                    <Profile />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route path='/payment-success' element={<PaymentSuccess />} />
+                        <Route path='/payment-failed' element={<PaymentFailed />} />
+                        <Route path='/payment-redirect/:status' element={<PaymentRedirect />} />
+                        <Route path='/' element={<Navigate to='/login' />} />
+                    </Routes>
+                </div>
+            </Router>
+        </LanguageProvider>
     );
 }
 

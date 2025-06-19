@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { subscriptionService } from "../services/api";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Subscriptions() {
     const [subscriptionData, setSubscriptionData] = useState(null);
@@ -11,6 +12,7 @@ function Subscriptions() {
     const [currentSubscription, setCurrentSubscription] = useState(null);
     const [activeTab, setActiveTab] = useState("active");
     const navigate = useNavigate();
+    const { t, language } = useLanguage();
 
     useEffect(() => {
         fetchSubscriptionData();
@@ -25,7 +27,7 @@ function Subscriptions() {
                 setSubscriptionData(response.subscription);
             }
         } catch (err) {
-            setError("فشل في تحميل بيانات الاشتراك");
+            setError(t("failedToLoadSubscriptionData"));
         } finally {
             setLoading(false);
         }
@@ -86,23 +88,23 @@ function Subscriptions() {
             }
         } catch (err) {
             console.error("Subscription error:", err);
-            setError(err.response?.data?.message || err.message || "فشل في إنشاء الاشتراك. يرجى المحاولة مرة أخرى.");
+            setError(err.response?.data?.message || err.message || t("failedToCreateSubscription"));
             setSubscribing(false);
         }
     };
 
     const handleCancelSubscription = async () => {
-        if (!window.confirm("هل أنت متأكد من أنك تريد إلغاء اشتراكك؟")) {
+        if (!window.confirm(t("areYouSureCancel"))) {
             return;
         }
 
         try {
             await subscriptionService.cancelSubscription();
             setCurrentSubscription(null);
-            alert("تم إلغاء الاشتراك بنجاح");
+            alert(t("subscriptionCancelledSuccessfully"));
             fetchCurrentSubscription();
         } catch (err) {
-            setError("فشل في إلغاء الاشتراك");
+            setError(t("failedToCancel"));
         }
     };
 
@@ -111,65 +113,49 @@ function Subscriptions() {
         navigate("/login");
     };
 
-    // Arabic translations for features
-    const featureTranslations = {
-        attachments: "المرفقات",
-        proofs: "الإثباتات",
-        daily_recap: "الملخص اليومي",
-        lock_chores: "قفل المهام",
-        late_penalty: "غرامة التأخير",
-        chat_upload_media: "رفع الوسائط في المحادثة",
-        weekly_values: "القيم الأسبوعية",
-        ai_chat: "محادثة الذكاء الاصطناعي",
-    };
-
     const translateFeature = (feature) => {
-        return featureTranslations[feature] || feature.replace(/_/g, " ");
+        return t(feature) || feature.replace(/_/g, " ");
     };
 
     const getBillingInterval = (interval) => {
-        const intervals = {
-            month: "شهر",
-            year: "سنة",
-            week: "أسبوع",
-            day: "يوم",
-        };
-        return intervals[interval] || interval;
+        return t(interval) || interval;
     };
 
     const renderActiveSubscription = () => {
         if (!currentSubscription) {
             return (
                 <div className='no-subscription'>
-                    <p>لا يوجد لديك اشتراك نشط حالياً</p>
+                    <p>{t("noActiveSubscription")}</p>
                     <button onClick={() => setActiveTab("upgrade")} className='nav-btn'>
-                        عرض خطة الاشتراك
+                        {t("viewSubscriptionPlan")}
                     </button>
                 </div>
             );
         }
 
         const expiryDate = currentSubscription.trial_days_remaining
-            ? `متبقي ${currentSubscription.trial_days_remaining} يوم من الفترة التجريبية`
+            ? `${language === "ar" ? "متبقي" : ""} ${currentSubscription.trial_days_remaining} ${t("daysRemaining")} ${
+                  language === "en" ? "" : ""
+              }`
             : currentSubscription.expires_at
-            ? new Date(currentSubscription.expires_at).toLocaleDateString("ar-SA")
-            : "غير محدد";
+            ? new Date(currentSubscription.expires_at).toLocaleDateString(language === "ar" ? "ar-SA" : "en-US")
+            : t("notSpecified");
 
         return (
             <div className='active-subscription-card'>
                 <div className='subscription-header'>
-                    <h3>{currentSubscription.is_trial_period ? "الفترة التجريبية" : "الباقة الحالية"}</h3>
-                    {currentSubscription.is_paid_plan && <span className='paid-badge'>مدفوع</span>}
+                    <h3>{currentSubscription.is_trial_period ? t("trialPeriod") : t("currentPlan")}</h3>
+                    {currentSubscription.is_paid_plan && <span className='paid-badge'>{t("paid")}</span>}
                 </div>
 
                 <div className='subscription-details'>
                     <p className='expiry-info'>
-                        <strong>تاريخ الانتهاء:</strong> {expiryDate}
+                        <strong>{t("expiryDate")}:</strong> {expiryDate}
                     </p>
                 </div>
 
                 <div className='features'>
-                    <h4>المميزات النشطة:</h4>
+                    <h4>{t("activeFeatures")}:</h4>
                     <ul>
                         {currentSubscription.features.map((feature, index) => (
                             <li key={index}>
@@ -182,11 +168,11 @@ function Subscriptions() {
 
                 <div className='subscription-actions'>
                     <button onClick={() => setActiveTab("upgrade")} className='upgrade-btn'>
-                        ترقية الباقة
+                        {t("upgrade")}
                     </button>
                     {currentSubscription.is_paid_plan && (
                         <button onClick={handleCancelSubscription} className='cancel-btn'>
-                            إلغاء الاشتراك
+                            {t("cancelSubscription")}
                         </button>
                     )}
                 </div>
@@ -198,7 +184,7 @@ function Subscriptions() {
         if (!subscriptionData) {
             return (
                 <div className='no-subscription'>
-                    <p>لا توجد خطة اشتراك متاحة حالياً</p>
+                    <p>{t("noSubscriptionAvailable")}</p>
                 </div>
             );
         }
@@ -213,7 +199,7 @@ function Subscriptions() {
         return (
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
                 <div className={`plan-card ${!isUpgrade ? "current-plan" : ""}`}>
-                    {!isUpgrade && <div className='current-plan-badge'>خطتك الحالية</div>}
+                    {!isUpgrade && <div className='current-plan-badge'>{t("yourCurrentPlan")}</div>}
                     <h3>{subscriptionData.name}</h3>
                     <p className='description'>{subscriptionData.description}</p>
 
@@ -224,7 +210,9 @@ function Subscriptions() {
                                 <span className='discounted-price'>
                                     ${subscriptionData.discounted_price || subscriptionData.price}
                                 </span>
-                                <span className='discount-badge'>خصم {subscriptionData.discount_percent}%</span>
+                                <span className='discount-badge'>
+                                    {t("discount")} {subscriptionData.discount_percent}%
+                                </span>
                             </>
                         ) : (
                             <span className='price'>${subscriptionData.price}</span>
@@ -233,7 +221,7 @@ function Subscriptions() {
                     </div>
 
                     <div className='features'>
-                        <h4>المميزات:</h4>
+                        <h4>{t("features")}:</h4>
                         <ul>
                             {subscriptionData.features.map((feature, index) => {
                                 const isNewFeature = !currentPlanFeatures.includes(feature);
@@ -241,7 +229,7 @@ function Subscriptions() {
                                     <li key={index} className={isNewFeature ? "new-feature" : ""}>
                                         <img src='/images/icons/check.svg' alt='check' />
                                         {translateFeature(feature)}
-                                        {isNewFeature && <span className='new-badge'>جديد</span>}
+                                        {isNewFeature && <span className='new-badge'>{t("new")}</span>}
                                     </li>
                                 );
                             })}
@@ -254,30 +242,30 @@ function Subscriptions() {
                         disabled={subscribing || !isUpgrade || subscriptionData.has_subscription}
                     >
                         {!isUpgrade
-                            ? "خطتك الحالية"
+                            ? t("yourCurrentPlan")
                             : subscriptionData.has_subscription
-                            ? "لديك هذا الاشتراك"
+                            ? t("youHaveThisSubscription")
                             : subscribing
-                            ? "جاري المعالجة..."
-                            : "ترقية الآن"}
+                            ? t("processing")
+                            : t("upgradeNow")}
                     </button>
                 </div>
             </div>
         );
     };
 
-    if (loading) return <div className='loading'>جاري تحميل بيانات الاشتراك...</div>;
+    if (loading) return <div className='loading'>{t("loadingSubscriptions")}</div>;
 
     return (
         <div className='subscriptions-container'>
             <div className='header'>
-                <h2>إدارة الاشتراكات</h2>
+                <h2>{t("manageSubscriptions")}</h2>
                 <div className='nav-buttons'>
                     <button onClick={() => navigate("/profile")} className='nav-btn'>
-                        الملف الشخصي
+                        {t("profile")}
                     </button>
                     <button onClick={handleLogout} className='logout-btn'>
-                        تسجيل الخروج
+                        {t("logout")}
                     </button>
                 </div>
             </div>
@@ -292,13 +280,13 @@ function Subscriptions() {
                             className={`tab-button ${activeTab === "active" ? "active" : ""}`}
                             onClick={() => setActiveTab("active")}
                         >
-                            الباقة الحالية
+                            {t("currentPlan")}
                         </button>
                         <button
                             className={`tab-button ${activeTab === "upgrade" ? "active" : ""}`}
                             onClick={() => setActiveTab("upgrade")}
                         >
-                            ترقية الباقة
+                            {t("upgradePlan")}
                         </button>
                     </div>
 
@@ -309,7 +297,9 @@ function Subscriptions() {
             ) : (
                 // Show subscription card if no active subscription
                 <>
-                    <h3 style={{ textAlign: "center", marginBottom: "30px" }}>خطة الاشتراك المتاحة</h3>
+                    <h3 className='center-text' style={{ marginBottom: "30px" }}>
+                        {t("availableSubscriptionPlans")}
+                    </h3>
                     {subscriptionData ? (
                         <div className='plan-card' style={{ maxWidth: "500px", margin: "0 auto" }}>
                             <h3>{subscriptionData.name}</h3>
@@ -322,7 +312,9 @@ function Subscriptions() {
                                         <span className='discounted-price'>
                                             ${subscriptionData.discounted_price || subscriptionData.price}
                                         </span>
-                                        <span className='discount-badge'>خصم {subscriptionData.discount_percent}%</span>
+                                        <span className='discount-badge'>
+                                            {t("discount")} {subscriptionData.discount_percent}%
+                                        </span>
                                     </>
                                 ) : (
                                     <span className='price'>${subscriptionData.price}</span>
@@ -333,7 +325,7 @@ function Subscriptions() {
                             </div>
 
                             <div className='features'>
-                                <h4>المميزات:</h4>
+                                <h4>{t("features")}:</h4>
                                 <ul>
                                     {subscriptionData.features.map((feature, index) => (
                                         <li key={index}>
@@ -350,15 +342,15 @@ function Subscriptions() {
                                 disabled={subscribing || subscriptionData.has_subscription}
                             >
                                 {subscriptionData.has_subscription
-                                    ? "لديك اشتراك نشط"
+                                    ? t("youHaveActiveSubscription")
                                     : subscribing
-                                    ? "جاري المعالجة..."
-                                    : "اشترك الآن"}
+                                    ? t("processing")
+                                    : t("subscribeNow")}
                             </button>
                         </div>
                     ) : (
                         <div className='no-subscription'>
-                            <p>لا توجد خطة اشتراك متاحة حالياً</p>
+                            <p>{t("noSubscriptionAvailable")}</p>
                         </div>
                     )}
                 </>
