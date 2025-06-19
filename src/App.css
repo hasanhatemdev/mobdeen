@@ -1,0 +1,376 @@
+/* src/App.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Cairo", sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    direction: rtl;
+}
+
+.App {
+    min-height: 100vh;
+}
+
+/* Login Styles */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+}
+
+.login-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 130px;
+    margin-inline: auto;
+}
+
+.login-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.login-form {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form h2 {
+    margin-bottom: 24px;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 400;
+    color: #555;
+    font-size: 14px;
+}
+
+.form-group .input-with-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding-right: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding-block: 10px;
+    padding-inline: 12px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    text-align: right;
+    border: 0;
+    border-radius: 16px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0066cc;
+}
+
+button {
+    width: 100%;
+    height: 52px;
+    background-color: #ebbd00;
+    color: black;
+    border: none;
+    border-radius: 3rem;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "Cairo", sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.error-message {
+    background-color: #fee;
+    color: #c33;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Subscriptions Styles */
+.subscriptions-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.header h2 {
+    color: #1a1a1a;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-btn,
+.logout-btn {
+    width: auto;
+    padding: 8px 20px;
+    font-size: 14px;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.plan-card {
+    background: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.plan-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.plan-card h3 {
+    margin-bottom: 10px;
+    color: #1a1a1a;
+    font-size: 24px;
+}
+
+.description {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.price-section {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.original-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 18px;
+}
+
+.price,
+.discounted-price {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0066cc;
+}
+
+.billing-cycle {
+    color: #666;
+    font-size: 16px;
+}
+
+.discount-badge {
+    background-color: #28a745;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.features {
+    margin-bottom: 20px;
+}
+
+.features h4 {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.features ul {
+    list-style: none;
+}
+
+.features li {
+    padding: 4px 0;
+    position: relative;
+    color: #666;
+    text-transform: capitalize;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.select-plan-btn {
+    background-color: #ebbd00;
+    margin-top: 10px;
+}
+
+.select-plan-btn:hover {
+    background-color: #d0a705;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #666;
+}
+
+/* Profile Styles */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+}
+
+.profile-card {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.profile-card h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.profile-info {
+    margin-bottom: 30px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.info-item strong {
+    color: #555;
+}
+
+.info-item span {
+    color: #333;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.profile-actions button {
+    flex: 1;
+}
+
+/* Payment Result Styles */
+.payment-result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+}
+
+.result-card {
+    background: white;
+    padding: 60px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+}
+
+.result-card .icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.result-card.success .icon {
+    color: #28a745;
+}
+
+.result-card.failed .icon {
+    color: #dc3545;
+}
+
+.result-card h2 {
+    margin-bottom: 15px;
+    color: #1a1a1a;
+}
+
+.result-card p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.result-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.result-actions button {
+    flex: 1;
+}
+
+.secondary-btn {
+    background-color: #6c757d;
+}
+
+.secondary-btn:hover {
+    background-color: #5a6268;
+}
