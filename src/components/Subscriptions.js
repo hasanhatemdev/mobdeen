@@ -10,6 +10,8 @@ function Subscriptions() {
     const [subscribing, setSubscribing] = useState(false);
     const [error, setError] = useState("");
     const [activeTab, setActiveTab] = useState("active");
+    const [showCancelModal, setShowCancelModal] = useState(false);
+    const [cancelling, setCancelling] = useState(false);
     const navigate = useNavigate();
     const { t, language } = useLanguage();
 
@@ -77,17 +79,20 @@ function Subscriptions() {
     };
 
     const handleCancelSubscription = async () => {
-        if (!window.confirm(t("areYouSureCancel"))) {
-            return;
-        }
+        setCancelling(true);
+        setError("");
 
         try {
             await subscriptionService.cancelSubscription();
-            alert(t("subscriptionCancelledSuccessfully"));
+            setShowCancelModal(false);
+            // Show success message
+            setError(""); // Clear any errors
             // Reload all data
             await loadData();
         } catch (err) {
             setError(t("failedToCancel"));
+        } finally {
+            setCancelling(false);
         }
     };
 
@@ -147,7 +152,7 @@ function Subscriptions() {
                             {t("upgradeFromTrial")}
                         </button>
                     )}
-                    <button onClick={handleCancelSubscription} className='cancel-btn'>
+                    <button onClick={() => setShowCancelModal(true)} className='cancel-btn'>
                         {t("cancelSubscription")}
                     </button>
                 </div>
@@ -275,6 +280,40 @@ function Subscriptions() {
                     </h3>
                     {renderUpgradePlans()}
                 </>
+            )}
+
+            {/* Cancellation Modal */}
+            {showCancelModal && (
+                <div className='modal-overlay' onClick={() => setShowCancelModal(false)}>
+                    <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+                        <div className='modal-header'>
+                            <h3>{t("cancelSubscriptionTitle")}</h3>
+                            <button className='modal-close' onClick={() => setShowCancelModal(false)}>
+                                ×
+                            </button>
+                        </div>
+                        <div className='modal-body'>
+                            <p>{t("areYouSureCancel")}</p>
+                            <p className='modal-warning'>{t("cancelWarning")}</p>
+                        </div>
+                        <div className='modal-footer'>
+                            <button
+                                className='modal-btn modal-btn-secondary'
+                                onClick={() => setShowCancelModal(false)}
+                                disabled={cancelling}
+                            >
+                                {t("keepSubscription")}
+                            </button>
+                            <button
+                                className='modal-btn modal-btn-danger'
+                                onClick={handleCancelSubscription}
+                                disabled={cancelling}
+                            >
+                                {cancelling ? t("cancelling") : t("confirmCancel")}
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );
