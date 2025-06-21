@@ -42,9 +42,117 @@ export const LanguageProvider = ({ children }) => {
 // Complete translations
 const translations = {
     en: {
-        // Header
+        // Header & Navigation
+        home: "Home",
+        features: "Features",
+        howItWorks: "How It Works",
         privacyPolicy: "Privacy Policy",
         login: "Login",
+        dashboard: "Dashboard",
+
+        // Hero Section
+        heroTitle: "Smart Parenting",
+        heroTitleHighlight: "United with Creativity",
+        heroSubtitle:
+            "An intelligent parenting app that helps you improve your child's behavior and skills through personalized tasks, points, rewards, and weekly progress reports.",
+        downloadApp: "Download App",
+        watchDemo: "Watch Demo",
+        floatingCard1: "Task Completed!",
+        floatingCard2: "10 Points Earned",
+        floatingCard3: "Weekly Progress",
+
+        // Who Uses Section
+        whoUsesTitle: "Who Uses Mobdeen?",
+        user1Title: "Families & Parents",
+        user1Desc: "Create stronger bonds through fun challenges and shared achievements",
+        user2Title: "Teachers & Educators",
+        user2Desc: "Track student progress and assign educational tasks effectively",
+        user3Title: "Schools & Centers",
+        user3Desc: "Manage multiple classrooms and monitor overall performance",
+        user4Title: "Educational Institutions",
+        user4Desc: "Implement structured behavioral improvement programs",
+
+        // Features Section
+        featuresTitle: "Key Features",
+        featuresSubtitle: "Everything you need to nurture your child's growth and development",
+        feature1Title: "Weekly Skill-Building Tasks",
+        feature1Desc:
+            "Every week focuses on a new value like cooperation, honesty, or respect with personalized insights",
+        feature2Title: "AI-Powered Recommendations",
+        feature2Desc: "Smart task suggestions based on your child's behavior patterns and progress",
+        feature3Title: "Multiple Caregivers",
+        feature3Desc: "Parents, teachers, and caregivers can all collaborate to support the same child",
+        feature4Title: "Progress Reports",
+        feature4Desc: "Weekly summaries with trends and improvement suggestions shared with the family",
+        feature5Title: "Reward System",
+        feature5Desc: "Children earn virtual cookies for completing tasks, motivating continuous improvement",
+        feature6Title: "Visual Learning",
+        feature6Desc: "Tasks presented visually to help nonverbal or language-delayed children understand easily",
+
+        // How It Works Section
+        howItWorksTitle: "How It Works",
+        step1Title: "Download & Setup",
+        step1Desc: "Download the app and add your children or students",
+        step2Title: "Choose Skills",
+        step2Desc: "Select the values and skills you want to focus on",
+        step3Title: "Track Progress",
+        step3Desc: "Monitor daily achievements and behavioral improvements",
+        step4Title: "Celebrate Success",
+        step4Desc: "Reward accomplishments and share progress with family",
+
+        // Stats Section
+        statsFamilies: "Happy Families",
+        statsTasks: "Tasks Completed",
+        statsRating: "App Store Rating",
+        statsSatisfaction: "Parent Satisfaction",
+
+        // Testimonials Section
+        testimonialsTitle: "What Parents Say",
+        testimonial1Name: "Sarah Ahmed",
+        testimonial1Role: "Mother of Two",
+        testimonial1Text:
+            "Mobdeen transformed our daily routines into fun challenges. My kids are more responsible and we bond better as a family!",
+        testimonial2Name: "Mohammed Ali",
+        testimonial2Role: "Father & Teacher",
+        testimonial2Text:
+            "As both a parent and educator, I love how Mobdeen bridges home and school. The progress tracking is invaluable.",
+        testimonial3Name: "Fatima Hassan",
+        testimonial3Role: "Special Needs Parent",
+        testimonial3Text:
+            "The visual task system works perfectly for my nonverbal child. Finally, an app that truly understands our needs!",
+
+        // Social Impact Section
+        socialImpactTitle: "Support Your Family — and Help Another",
+        socialImpactDesc:
+            "Part of our profits goes toward funding education for children from low-income families. Every conscious parent helps build a better future.",
+        childrenSupported: "Children Supported",
+        profitsShared: "Profits Shared",
+
+        // CTA Section
+        ctaTitle: "Ready to Transform Your Parenting Journey?",
+        ctaSubtitle: "Join thousands of families creating better futures through smart parenting",
+        startFreeTrial: "Start Free Trial",
+        ctaNote: "No credit card required • 14-day free trial",
+
+        // Social Links
+        followUs: "Connect With Us",
+
+        // Footer
+        footerTagline: "Empowering families to raise creative, responsible children through smart technology",
+        footerProduct: "Product",
+        footerCompany: "Company",
+        footerSupport: "Support",
+        footerConnect: "Connect",
+        pricing: "Pricing",
+        download: "Download",
+        aboutUs: "About Us",
+        termsOfService: "Terms of Service",
+        contact: "Contact",
+        helpCenter: "Help Center",
+        faq: "FAQ",
+        emailSupport: "Email Support",
+        phoneSupport: "Call Us",
+        footerRights: "© 2025 Mobdeen. All rights reserved.",
 
         // Login
         enterEmail: "Enter your email",
@@ -54,12 +162,6 @@ const translations = {
         email: "Email",
         password: "Password",
         loginFailed: "Login failed. Please check your credentials.",
-
-        // Home Page
-        homeTitle: "Mobdeen",
-        homeDescription:
-            'Mobdeen is an entertainment app designed for families, offering an interactive experience where parents can assign fun tasks, track progress, and reward their children with virtual "cookies." By turning daily routines into engaging challenges, Mobdeen strengthens family bonds while making learning and responsibility enjoyable for kids.',
-        downloadApp: "Download the App",
 
         // Privacy Policy
         privacyPolicyTitle: 'Privacy Policy for "Mobdeen" App',
@@ -117,7 +219,6 @@ const translations = {
         contactPhone: "– Phone: +971-528-978888",
 
         // Footer
-        footerRights: "© 2025 Mobdeen. All rights reserved.",
         footerDescription: "Smart family management app for better parenting",
 
         // Subscriptions
@@ -222,9 +323,114 @@ const translations = {
         admin: "Admin",
     },
     ar: {
-        // Header
+        // Header & Navigation
+        home: "الرئيسية",
+        features: "المميزات",
+        howItWorks: "كيف يعمل",
         privacyPolicy: "سياسة الخصوصية",
         login: "تسجيل الدخول",
+        dashboard: "لوحة التحكم",
+
+        // Hero Section
+        heroTitle: "تربية ذكية",
+        heroTitleHighlight: "متحدة بالإبداع",
+        heroSubtitle:
+            "تطبيق تربوي ذكي يساعدك على تحسين سلوك ومهارات طفلك من خلال المهام المخصصة والنقاط والمكافآت وتقارير التقدم الأسبوعية.",
+        downloadApp: "حمل التطبيق",
+        watchDemo: "شاهد العرض",
+        floatingCard1: "تمت المهمة!",
+        floatingCard2: "10 نقاط مكتسبة",
+        floatingCard3: "التقدم الأسبوعي",
+
+        // Who Uses Section
+        whoUsesTitle: "من يستخدم مبدعين؟",
+        user1Title: "العائلات والآباء",
+        user1Desc: "بناء روابط أقوى من خلال التحديات الممتعة والإنجازات المشتركة",
+        user2Title: "المعلمون والمربون",
+        user2Desc: "تتبع تقدم الطلاب وتعيين المهام التعليمية بفعالية",
+        user3Title: "المدارس والمراكز",
+        user3Desc: "إدارة فصول متعددة ومراقبة الأداء العام",
+        user4Title: "المؤسسات التعليمية",
+        user4Desc: "تطبيق برامج منظمة لتحسين السلوك",
+
+        // Features Section
+        featuresTitle: "المميزات الرئيسية",
+        featuresSubtitle: "كل ما تحتاجه لرعاية نمو وتطور طفلك",
+        feature1Title: "مهام بناء المهارات الأسبوعية",
+        feature1Desc: "كل أسبوع يركز على قيمة جديدة مثل التعاون أو الصدق أو الاحترام مع رؤى مخصصة",
+        feature2Title: "توصيات مدعومة بالذكاء الاصطناعي",
+        feature2Desc: "اقتراحات مهام ذكية بناءً على أنماط سلوك طفلك وتقدمه",
+        feature3Title: "مقدمو رعاية متعددون",
+        feature3Desc: "يمكن للوالدين والمعلمين ومقدمي الرعاية التعاون لدعم نفس الطفل",
+        feature4Title: "تقارير التقدم",
+        feature4Desc: "ملخصات أسبوعية مع الاتجاهات واقتراحات التحسين المشتركة مع العائلة",
+        feature5Title: "نظام المكافآت",
+        feature5Desc: "يكسب الأطفال كوكيز افتراضية لإكمال المهام، مما يحفز التحسين المستمر",
+        feature6Title: "التعلم البصري",
+        feature6Desc: "تُعرض المهام بصريًا لمساعدة الأطفال غير اللفظيين أو المتأخرين لغويًا على الفهم بسهولة",
+
+        // How It Works Section
+        howItWorksTitle: "كيف يعمل",
+        step1Title: "التحميل والإعداد",
+        step1Desc: "حمل التطبيق وأضف أطفالك أو طلابك",
+        step2Title: "اختر المهارات",
+        step2Desc: "حدد القيم والمهارات التي تريد التركيز عليها",
+        step3Title: "تتبع التقدم",
+        step3Desc: "راقب الإنجازات اليومية والتحسينات السلوكية",
+        step4Title: "احتفل بالنجاح",
+        step4Desc: "كافئ الإنجازات وشارك التقدم مع العائلة",
+
+        // Stats Section
+        statsFamilies: "عائلة سعيدة",
+        statsTasks: "مهمة مكتملة",
+        statsRating: "تقييم المتجر",
+        statsSatisfaction: "رضا الوالدين",
+
+        // Testimonials Section
+        testimonialsTitle: "ماذا يقول الآباء",
+        testimonial1Name: "سارة أحمد",
+        testimonial1Role: "أم لطفلين",
+        testimonial1Text:
+            "حوّل مبدعين روتيننا اليومي إلى تحديات ممتعة. أطفالي أصبحوا أكثر مسؤولية ونترابط بشكل أفضل كعائلة!",
+        testimonial2Name: "محمد علي",
+        testimonial2Role: "أب ومعلم",
+        testimonial2Text: "كوني أب ومعلم، أحب كيف يربط مبدعين بين المنزل والمدرسة. تتبع التقدم لا يقدر بثمن.",
+        testimonial3Name: "فاطمة حسن",
+        testimonial3Role: "أم لطفل من ذوي الاحتياجات الخاصة",
+        testimonial3Text: "نظام المهام البصرية يعمل بشكل مثالي مع طفلي غير اللفظي. أخيرًا، تطبيق يفهم احتياجاتنا حقًا!",
+
+        // Social Impact Section
+        socialImpactTitle: "ادعم عائلتك — وساعد عائلة أخرى",
+        socialImpactDesc:
+            "جزء من أرباحنا يذهب لتمويل تعليم الأطفال من الأسر ذات الدخل المحدود. كل والد واعٍ يساعد في بناء مستقبل أفضل.",
+        childrenSupported: "طفل مدعوم",
+        profitsShared: "من الأرباح المشتركة",
+
+        // CTA Section
+        ctaTitle: "مستعد لتحويل رحلتك التربوية؟",
+        ctaSubtitle: "انضم لآلاف العائلات التي تصنع مستقبلاً أفضل من خلال التربية الذكية",
+        startFreeTrial: "ابدأ التجربة المجانية",
+        ctaNote: "لا حاجة لبطاقة ائتمان • تجربة مجانية لمدة 14 يومًا",
+
+        // Social Links
+        followUs: "تواصل معنا",
+
+        // Footer
+        footerTagline: "نمكّن العائلات من تربية أطفال مبدعين ومسؤولين من خلال التقنية الذكية",
+        footerProduct: "المنتج",
+        footerCompany: "الشركة",
+        footerSupport: "الدعم",
+        footerConnect: "تواصل",
+        pricing: "الأسعار",
+        download: "تحميل",
+        aboutUs: "عن الشركة",
+        termsOfService: "شروط الخدمة",
+        contact: "اتصل بنا",
+        helpCenter: "مركز المساعدة",
+        faq: "الأسئلة الشائعة",
+        emailSupport: "الدعم عبر البريد",
+        phoneSupport: "اتصل بنا",
+        footerRights: "© 2025 مبدعين. جميع الحقوق محفوظة.",
 
         // Login
         enterEmail: "أدخل بريدك الإلكتروني",
@@ -234,12 +440,6 @@ const translations = {
         email: "البريد الإلكتروني",
         password: "كلمة المرور",
         loginFailed: "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك.",
-
-        // Home Page
-        homeTitle: "مبدعين",
-        homeDescription:
-            'مبدعين هو تطبيق ترفيهي مصمم للعائلات، يوفر تجربة تفاعلية حيث يمكن للوالدين تعيين مهام ممتعة، وتتبع التقدم، ومكافأة أطفالهم بـ "الكوكيز" الافتراضية. من خلال تحويل الروتين اليومي إلى تحديات جذابة، يقوي مبدعين الروابط الأسرية بينما يجعل التعلم والمسؤولية ممتعة للأطفال.',
-        downloadApp: "حمل التطبيق",
 
         // Privacy Policy
         privacyPolicyTitle: 'سياسة الخصوصية لتطبيق "مبدعين"',
@@ -297,7 +497,6 @@ const translations = {
         contactPhone: "– الهاتف: +971-528-978888",
 
         // Footer
-        footerRights: "© 2025 مبدعين. جميع الحقوق محفوظة.",
         footerDescription: "تطبيق إدارة العائلة الذكي لتربية أفضل",
 
         // Subscriptions

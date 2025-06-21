@@ -38,6 +38,12 @@ function App() {
         return token ? children : <Navigate to='/login' />;
     };
 
+    // Public Route Component - redirects to profile if already logged in
+    const PublicRoute = ({ children }) => {
+        const token = localStorage.getItem("access_token");
+        return token ? <Navigate to='/profile' /> : children;
+    };
+
     // Layout for public pages (with header and footer)
     const PublicLayout = ({ children }) => (
         <>
@@ -82,39 +88,49 @@ function App() {
                             }
                         />
 
-                        {/* App Routes */}
+                        {/* App Routes - Public (redirect if authenticated) */}
                         <Route
                             path='/login'
                             element={
-                                <AppLayout>
-                                    <Login />
-                                </AppLayout>
+                                <PublicRoute>
+                                    <AppLayout>
+                                        <Login />
+                                    </AppLayout>
+                                </PublicRoute>
                             }
                         />
                         <Route
                             path='/forgot-password'
                             element={
-                                <AppLayout>
-                                    <ForgotPassword />
-                                </AppLayout>
+                                <PublicRoute>
+                                    <AppLayout>
+                                        <ForgotPassword />
+                                    </AppLayout>
+                                </PublicRoute>
                             }
                         />
                         <Route
                             path='/verify-otp'
                             element={
-                                <AppLayout>
-                                    <VerifyOTP />
-                                </AppLayout>
+                                <PublicRoute>
+                                    <AppLayout>
+                                        <VerifyOTP />
+                                    </AppLayout>
+                                </PublicRoute>
                             }
                         />
                         <Route
                             path='/reset-password'
                             element={
-                                <AppLayout>
-                                    <ResetPassword />
-                                </AppLayout>
+                                <PublicRoute>
+                                    <AppLayout>
+                                        <ResetPassword />
+                                    </AppLayout>
+                                </PublicRoute>
                             }
                         />
+
+                        {/* Protected Routes */}
                         <Route
                             path='/subscriptions'
                             element={
@@ -135,6 +151,8 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
+
+                        {/* Payment Routes - These can be accessed by anyone */}
                         <Route
                             path='/payment-success'
                             element={
@@ -159,6 +177,9 @@ function App() {
                                 </AppLayout>
                             }
                         />
+
+                        {/* Default redirect */}
+                        <Route path='*' element={<Navigate to='/' />} />
                     </Routes>
                 </div>
             </Router>
