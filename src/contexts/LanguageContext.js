@@ -35,6 +35,13 @@ const translations = {
         privacyPolicy: "Privacy Policy",
         login: "Login",
 
+        enterEmail: "Enter your email",
+        enterPassword: "Enter your password",
+        forgotPassword: "Forgot Password?",
+        loggingIn: "Logging in...",
+        email: "Email",
+        password: "Password",
+
         // Home Page
         homeTitle: "Mobdeen",
         homeDescription:
@@ -99,23 +106,74 @@ const translations = {
         // Footer
         footerRights: "© 2025 Mobdeen. All rights reserved.",
         footerDescription: "Smart family management app for better parenting",
+
+        // Subscriptions
+        manageSubscriptions: "Manage Subscriptions",
+        loadingSubscriptions: "Loading subscriptions...",
+        profile: "Profile",
+        logout: "Logout",
+        noActiveSubscription: "No active subscription",
+        viewSubscriptionPlan: "View Subscription Plans",
+        currentPlan: "Current Plan",
+        upgradePlan: "Upgrade Plan",
+        availableSubscriptionPlans: "Available Subscription Plans",
+        noSubscriptionAvailable: "No subscription plans available",
+        yourCurrentPlan: "Your Current Plan",
+        upgradeNow: "Upgrade Now",
+        subscribeNow: "Subscribe Now",
+        processing: "Processing...",
+        failedToLoadSubscriptionData: "Failed to load subscription data",
+        failedToCreateSubscription: "Failed to create subscription",
+        failedToCancel: "Failed to cancel subscription",
+        areYouSureCancel: "Are you sure you want to cancel your subscription?",
+        subscriptionCancelledSuccessfully: "Subscription cancelled successfully",
+        trialPeriod: "Trial Period",
+        paid: "Paid",
+        expiryDate: "Expiry Date",
+        daysRemaining: "days",
+        notSpecified: "Not specified",
+        activeFeatures: "Active Features",
+        upgrade: "Upgrade",
+        cancelSubscription: "Cancel Subscription",
+        features: "Features",
+        discount: "Discount",
+        new: "NEW",
+        month: "month",
+        year: "year",
+        // Features translations
+        attachments: "attachments",
+        proofs: "proofs",
+        daily_recap: "daily recap",
+        lock_chores: "lock chores",
+        late_penalty: "late penalty",
+        chat_upload_media: "chat upload media",
+        weekly_values: "weekly values",
+        ai_chat: "AI chat",
     },
     ar: {
         // Header
         privacyPolicy: "سياسة الخصوصية",
         login: "تسجيل الدخول",
 
+        enterEmail: "أدخل بريدك الالكتروني",
+        enterPassword: "أدخل كلمة المرور",
+        forgotPassword: "نسيت كلمة المرور؟",
+        loggingIn: "تسحيل الدخول...",
+
+        email: "البريد الإلكتروني",
+        password: "كلمة المرور",
+
         // Home Page
-        homeTitle: "مُبدين",
+        homeTitle: "مبدعين",
         homeDescription:
-            'مُبدين هو تطبيق ترفيهي مصمم للعائلات، يوفر تجربة تفاعلية حيث يمكن للوالدين تعيين مهام ممتعة، وتتبع التقدم، ومكافأة أطفالهم بـ "الكوكيز" الافتراضية. من خلال تحويل الروتين اليومي إلى تحديات جذابة، يقوي مُبدين الروابط الأسرية بينما يجعل التعلم والمسؤولية ممتعة للأطفال.',
+            'مبدعين هو تطبيق ترفيهي مصمم للعائلات، يوفر تجربة تفاعلية حيث يمكن للوالدين تعيين مهام ممتعة، وتتبع التقدم، ومكافأة أطفالهم بـ "الكوكيز" الافتراضية. من خلال تحويل الروتين اليومي إلى تحديات جذابة، يقوي مبدعين الروابط الأسرية بينما يجعل التعلم والمسؤولية ممتعة للأطفال.',
         downloadApp: "حمل التطبيق",
 
         // Privacy Policy
-        privacyPolicyTitle: 'سياسة الخصوصية لتطبيق "مُبدين"',
+        privacyPolicyTitle: 'سياسة الخصوصية لتطبيق "مبدعين"',
         lastUpdated: "آخر تحديث: 09-05-2025",
         privacyIntro:
-            "مرحبًا بكم في مُبدين – تطبيق إدارة العائلة الذكي الذي يساعد الوالدين على تعيين المهام وتتبع التقدم ومكافأة أطفالهم. نحن نأخذ خصوصيتك وخصوصية عائلتك على محمل الجد ونلتزم بحماية بياناتك بشفافية وعناية.",
+            "مرحبًا بكم في مبدعين – تطبيق إدارة العائلة الذكي الذي يساعد الوالدين على تعيين المهام وتتبع التقدم ومكافأة أطفالهم. نحن نأخذ خصوصيتك وخصوصية عائلتك على محمل الجد ونلتزم بحماية بياناتك بشفافية وعناية.",
 
         section1Title: "1. المعلومات التي نجمعها:",
         accountInfo: "– معلومات الحساب: الاسم، البريد الإلكتروني، تاريخ الميلاد، العلاقة، وصورة الملف الشخصي.",
@@ -167,7 +225,7 @@ const translations = {
         contactPhone: "– الهاتف: +971-528-978888",
 
         // Footer
-        footerRights: "© 2025 مُبدين. جميع الحقوق محفوظة.",
+        footerRights: "© 2025 مبدعين. جميع الحقوق محفوظة.",
         footerDescription: "تطبيق إدارة العائلة الذكي لتربية أفضل",
     },
 };

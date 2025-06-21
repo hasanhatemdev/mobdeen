@@ -21,9 +21,10 @@ function Subscriptions() {
     const fetchSubscriptionData = async () => {
         try {
             const response = await subscriptionService.getPlans();
-            // Only use the subscription data
-            if (response.subscription) {
-                setSubscriptionData(response.subscription);
+            // Use the plans data array instead of subscription
+            if (response.plans && response.plans.data && response.plans.data.length > 0) {
+                // For now, we'll use the first plan (Premium plan)
+                setSubscriptionData(response.plans.data[0]);
             }
         } catch (err) {
             setError(t("failedToLoadSubscriptionData"));
