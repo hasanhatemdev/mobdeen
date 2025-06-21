@@ -11,36 +11,49 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider = ({ children }) => {
-    const [language, setLanguage] = useState("en");
+    // Initialize language from localStorage or default to 'en'
+    const [language, setLanguage] = useState(() => {
+        return localStorage.getItem("language") || "en";
+    });
+
+    useEffect(() => {
+        // Save language preference to localStorage
+        localStorage.setItem("language", language);
+
+        // Update document direction and font
+        document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+        document.documentElement.lang = language;
+
+        // Update body class for CSS styling
+        document.body.className = language === "ar" ? "arabic" : "english";
+    }, [language]);
 
     const toggleLanguage = () => {
         setLanguage((prev) => (prev === "en" ? "ar" : "en"));
     };
 
     const t = (key) => {
-        return translations[language][key] || key;
+        return translations[language][key] || translations["en"][key] || key;
     };
 
-    return (
-        <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
-            <div dir={language === "ar" ? "rtl" : "ltr"}>{children}</div>
-        </LanguageContext.Provider>
-    );
+    return <LanguageContext.Provider value={{ language, toggleLanguage, t }}>{children}</LanguageContext.Provider>;
 };
 
-// Translations
+// Complete translations
 const translations = {
     en: {
         // Header
         privacyPolicy: "Privacy Policy",
         login: "Login",
 
+        // Login
         enterEmail: "Enter your email",
         enterPassword: "Enter your password",
         forgotPassword: "Forgot Password?",
         loggingIn: "Logging in...",
         email: "Email",
         password: "Password",
+        loginFailed: "Login failed. Please check your credentials.",
 
         // Home Page
         homeTitle: "Mobdeen",
@@ -126,11 +139,17 @@ const translations = {
         failedToCreateSubscription: "Failed to create subscription",
         failedToCancel: "Failed to cancel subscription",
         areYouSureCancel: "Are you sure you want to cancel your subscription?",
+        cancelWarning: "You will lose access to all premium features immediately.",
+        keepSubscription: "Keep Subscription",
+        confirmCancel: "Yes, Cancel",
+        cancelling: "Cancelling...",
+        cancelSubscriptionTitle: "Cancel Subscription?",
         subscriptionCancelledSuccessfully: "Subscription cancelled successfully",
         trialPeriod: "Trial Period",
         paid: "Paid",
         expiryDate: "Expiry Date",
-        daysRemaining: "days",
+        daysRemaining: "days remaining",
+        days: "days",
         notSpecified: "Not specified",
         activeFeatures: "Active Features",
         upgrade: "Upgrade",
@@ -140,16 +159,24 @@ const translations = {
         new: "NEW",
         month: "month",
         year: "year",
+
         // Features translations
-        attachments: "attachments",
-        proofs: "proofs",
-        daily_recap: "daily recap",
-        lock_chores: "lock chores",
-        late_penalty: "late penalty",
-        chat_upload_media: "chat upload media",
-        weekly_values: "weekly values",
-        ai_chat: "AI chat",
-        // Add these to the en translations object:
+        attachments: "Attachments",
+        proofs: "Proofs",
+        daily_recap: "Daily Recap",
+        lock_chores: "Lock Chores",
+        late_penalty: "Late Penalty",
+        chat_upload_media: "Chat Upload Media",
+        weekly_values: "Weekly Values",
+        ai_chat: "AI Chat",
+        dailyRecap: "Daily Recap",
+        lockChores: "Lock Chores",
+        latePenalty: "Late Penalty",
+        chatUploadMedia: "Chat Upload Media",
+        weeklyValues: "Weekly Values",
+        aiChat: "AI Chat",
+
+        // Additional translations
         premiumPlan: "Premium Plan",
         remaining: "Remaining",
         upgradeFromTrial: "Upgrade from Trial",
@@ -188,20 +215,25 @@ const translations = {
         viewSubscriptions: "View Subscriptions",
         userId: "User ID",
         role: "Role",
-        loginFailed: "Login failed. Please check your credentials.",
+
+        // User roles
+        parent: "Parent",
+        child: "Child",
+        admin: "Admin",
     },
     ar: {
         // Header
         privacyPolicy: "سياسة الخصوصية",
         login: "تسجيل الدخول",
 
-        enterEmail: "أدخل بريدك الالكتروني",
+        // Login
+        enterEmail: "أدخل بريدك الإلكتروني",
         enterPassword: "أدخل كلمة المرور",
         forgotPassword: "نسيت كلمة المرور؟",
-        loggingIn: "تسحيل الدخول...",
-
+        loggingIn: "جاري تسجيل الدخول...",
         email: "البريد الإلكتروني",
         password: "كلمة المرور",
+        loginFailed: "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك.",
 
         // Home Page
         homeTitle: "مبدعين",
@@ -268,7 +300,63 @@ const translations = {
         footerRights: "© 2025 مبدعين. جميع الحقوق محفوظة.",
         footerDescription: "تطبيق إدارة العائلة الذكي لتربية أفضل",
 
-        // Add these to the ar translations object:
+        // Subscriptions
+        manageSubscriptions: "إدارة الاشتراكات",
+        loadingSubscriptions: "جاري تحميل الاشتراكات...",
+        profile: "الملف الشخصي",
+        logout: "تسجيل الخروج",
+        noActiveSubscription: "لا يوجد اشتراك نشط",
+        viewSubscriptionPlan: "عرض خطط الاشتراك",
+        currentPlan: "الخطة الحالية",
+        upgradePlan: "ترقية الخطة",
+        availableSubscriptionPlans: "خطط الاشتراك المتاحة",
+        noSubscriptionAvailable: "لا توجد خطط اشتراك متاحة",
+        yourCurrentPlan: "خطتك الحالية",
+        upgradeNow: "قم بالترقية الآن",
+        subscribeNow: "اشترك الآن",
+        processing: "جاري المعالجة...",
+        failedToLoadSubscriptionData: "فشل تحميل بيانات الاشتراك",
+        failedToCreateSubscription: "فشل إنشاء الاشتراك",
+        failedToCancel: "فشل إلغاء الاشتراك",
+        areYouSureCancel: "هل أنت متأكد من أنك تريد إلغاء اشتراكك؟",
+        cancelWarning: "ستفقد الوصول إلى جميع الميزات المميزة على الفور.",
+        keepSubscription: "الاحتفاظ بالاشتراك",
+        confirmCancel: "نعم، إلغاء",
+        cancelling: "جاري الإلغاء...",
+        cancelSubscriptionTitle: "إلغاء الاشتراك؟",
+        subscriptionCancelledSuccessfully: "تم إلغاء الاشتراك بنجاح",
+        trialPeriod: "الفترة التجريبية",
+        paid: "مدفوع",
+        expiryDate: "تاريخ الانتهاء",
+        daysRemaining: "يوم متبقي",
+        days: "يوم",
+        notSpecified: "غير محدد",
+        activeFeatures: "الميزات النشطة",
+        upgrade: "ترقية",
+        cancelSubscription: "إلغاء الاشتراك",
+        features: "الميزات",
+        discount: "خصم",
+        new: "جديد",
+        month: "شهر",
+        year: "سنة",
+
+        // Features translations
+        attachments: "المرفقات",
+        proofs: "الإثباتات",
+        daily_recap: "الملخص اليومي",
+        lock_chores: "قفل المهام",
+        late_penalty: "غرامة التأخير",
+        chat_upload_media: "رفع الوسائط في المحادثة",
+        weekly_values: "القيم الأسبوعية",
+        ai_chat: "محادثة الذكاء الاصطناعي",
+        dailyRecap: "الملخص اليومي",
+        lockChores: "قفل المهام",
+        latePenalty: "غرامة التأخير",
+        chatUploadMedia: "رفع الوسائط في المحادثة",
+        weeklyValues: "القيم الأسبوعية",
+        aiChat: "محادثة الذكاء الاصطناعي",
+
+        // Additional translations
         premiumPlan: "الخطة المميزة",
         remaining: "المتبقي",
         upgradeFromTrial: "الترقية من الفترة التجريبية",
@@ -307,6 +395,10 @@ const translations = {
         viewSubscriptions: "عرض الاشتراكات",
         userId: "معرف المستخدم",
         role: "الدور",
-        loginFailed: "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك.",
+
+        // User roles
+        parent: "والد",
+        child: "طفل",
+        admin: "مدير",
     },
 };

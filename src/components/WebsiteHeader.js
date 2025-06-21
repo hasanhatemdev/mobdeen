@@ -1,9 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 
 function WebsiteHeader() {
     const { t, language, toggleLanguage } = useLanguage();
+    const navigate = useNavigate();
+    const isAuthenticated = !!localStorage.getItem("access_token");
+
+    const handleAuthAction = () => {
+        if (isAuthenticated) {
+            navigate("/subscriptions");
+        } else {
+            navigate("/login");
+        }
+    };
 
     return (
         <header className='website-header'>
@@ -16,9 +26,9 @@ function WebsiteHeader() {
                     <Link to='/privacy-policy' className='nav-link'>
                         {t("privacyPolicy")}
                     </Link>
-                    <Link to='/login' className='nav-link login-link'>
-                        {t("login")}
-                    </Link>
+                    <button onClick={handleAuthAction} className='nav-link login-link'>
+                        {isAuthenticated ? t("profile") : t("login")}
+                    </button>
                     <button className='language-switcher' onClick={toggleLanguage} aria-label='Switch language'>
                         <span className='lang-flag'>{language === "en" ? "🇬🇧" : "🇦🇪"}</span>
                         <span className='lang-text'>{language === "en" ? "EN" : "AR"}</span>

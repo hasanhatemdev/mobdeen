@@ -21,7 +21,9 @@ function Profile() {
     };
 
     const getRoleInLanguage = (role) => {
-        return t(role) || role;
+        // Convert role to lowercase for consistent translation keys
+        const roleKey = role?.toLowerCase();
+        return t(roleKey) || t(role) || role;
     };
 
     return (

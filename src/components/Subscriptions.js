@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { subscriptionService } from "../services/api";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -9,15 +9,31 @@ function Subscriptions() {
     const [loading, setLoading] = useState(true);
     const [subscribing, setSubscribing] = useState(false);
     const [error, setError] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
     const [activeTab, setActiveTab] = useState("active");
     const [showCancelModal, setShowCancelModal] = useState(false);
     const [cancelling, setCancelling] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
     const { t, language } = useLanguage();
 
     useEffect(() => {
         loadData();
-    }, []);
+
+        // Check for payment status in URL
+        const searchParams = new URLSearchParams(location.search);
+        const paymentStatus = searchParams.get("payment_status");
+
+        if (paymentStatus === "success") {
+            setSuccessMessage(t("paymentSuccessful"));
+            // Clear the URL parameter
+            window.history.replaceState({}, document.title, location.pathname);
+        } else if (paymentStatus === "failed") {
+            setError(t("paymentFailed"));
+            // Clear the URL parameter
+            window.history.replaceState({}, document.title, location.pathname);
+        }
+    }, [location, t]);
 
     const loadData = async () => {
         setLoading(true);
@@ -85,8 +101,7 @@ function Subscriptions() {
         try {
             await subscriptionService.cancelSubscription();
             setShowCancelModal(false);
-            // Show success message
-            setError(""); // Clear any errors
+            setSuccessMessage(t("subscriptionCancelledSuccessfully"));
             // Reload all data
             await loadData();
         } catch (err) {
@@ -97,7 +112,9 @@ function Subscriptions() {
     };
 
     const translateFeature = (feature) => {
-        return t(feature) || feature.replace(/_/g, " ");
+        // Convert snake_case to camelCase for translation key
+        const key = feature.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
+        return t(feature) || t(key) || feature.replace(/_/g, " ");
     };
 
     const renderActiveSubscription = () => {
@@ -114,7 +131,9 @@ function Subscriptions() {
 
         const subscriptionType = currentSubscription.is_trial_period ? t("trialPeriod") : t("premiumPlan");
         const daysInfo = currentSubscription.trial_days_remaining
-            ? `${currentSubscription.trial_days_remaining} ${t("daysRemaining")}`
+            ? language === "ar"
+                ? `${currentSubscription.trial_days_remaining} ${t("days")}`
+                : `${currentSubscription.trial_days_remaining} ${t("days")}`
             : "";
 
         return (
@@ -147,14 +166,20 @@ function Subscriptions() {
                 </div>
 
                 <div className='subscription-actions'>
-                    {currentSubscription.is_trial_period && (
+                    {currentSubscription.is_trial_period ? (
                         <button onClick={() => setActiveTab("upgrade")} className='upgrade-btn'>
                             {t("upgradeFromTrial")}
                         </button>
+                    ) : (
+                        <>
+                            <button onClick={() => setActiveTab("upgrade")} className='upgrade-btn'>
+                                {t("upgradePlan")}
+                            </button>
+                            <button onClick={() => setShowCancelModal(true)} className='cancel-btn'>
+                                {t("cancelSubscription")}
+                            </button>
+                        </>
                     )}
-                    <button onClick={() => setShowCancelModal(true)} className='cancel-btn'>
-                        {t("cancelSubscription")}
-                    </button>
                 </div>
             </div>
         );
@@ -251,6 +276,7 @@ function Subscriptions() {
             </div>
 
             {error && <div className='error-message'>{error}</div>}
+            {successMessage && <div className='success-message'>{successMessage}</div>}
 
             {hasSubscription ? (
                 <>
