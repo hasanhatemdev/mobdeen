@@ -17,11 +17,117 @@ import {
     Shield,
     Award,
     MessageCircle,
+    Calendar,
+    ListChecks,
+    Navigation,
+    CalendarDays,
+    Eye,
+    ChevronLeft,
+    ChevronRight,
 } from "lucide-react";
 
 function HomePage() {
     const { t, language } = useLanguage();
     const [activeFeature, setActiveFeature] = useState(0);
+    const [currentScreenshot, setCurrentScreenshot] = useState(0);
+    const [activeCategory, setActiveCategory] = useState(0);
+
+    // Hero screenshots rotation (showing core features)
+    const heroScreenshots = [
+        { id: 1, path: "/images/screenshots/screen1.jpeg", title: "Pending Activities" },
+        { id: 3, path: "/images/screenshots/screen3.jpeg", title: "Rewards System" },
+        { id: 8, path: "/images/screenshots/screen8.jpeg", title: "Kids Overview" },
+    ];
+
+    // Feature categories with screenshots
+    const featureCategories = [
+        {
+            id: 0,
+            icon: <ListChecks className='w-6 h-6' />,
+            title: language === "en" ? "Task Management" : "إدارة المهام",
+            description:
+                language === "en"
+                    ? "Track and manage daily activities with ease"
+                    : "تتبع وإدارة الأنشطة اليومية بسهولة",
+            screenshots: [
+                {
+                    id: 1,
+                    path: "/images/screenshots/screen1.jpeg",
+                    title: language === "en" ? "Pending Activities" : "الأنشطة المعلقة",
+                    desc: language === "en" ? "View all pending tasks at a glance" : "عرض جميع المهام المعلقة في لمحة",
+                },
+                {
+                    id: 8,
+                    path: "/images/screenshots/screen8.jpeg",
+                    title: language === "en" ? "Kids Activities Overview" : "نظرة عامة على أنشطة الأطفال",
+                    desc: language === "en" ? "Monitor all children's progress" : "مراقبة تقدم جميع الأطفال",
+                },
+            ],
+        },
+        {
+            id: 1,
+            icon: <Gift className='w-6 h-6' />,
+            title: language === "en" ? "Rewards & Motivation" : "المكافآت والتحفيز",
+            description:
+                language === "en" ? "Motivate with rewards and easy navigation" : "حفز بالمكافآت والتنقل السهل",
+            screenshots: [
+                {
+                    id: 3,
+                    path: "/images/screenshots/screen3.jpeg",
+                    title: language === "en" ? "Available Rewards" : "المكافآت المتاحة",
+                    desc: language === "en" ? "Exciting rewards to earn" : "مكافآت مثيرة للحصول عليها",
+                },
+                {
+                    id: 2,
+                    path: "/images/screenshots/screen2.jpeg",
+                    title: language === "en" ? "Quick Navigation" : "التنقل السريع",
+                    desc: language === "en" ? "Access features instantly" : "الوصول إلى الميزات على الفور",
+                },
+            ],
+        },
+        {
+            id: 2,
+            icon: <Calendar className='w-6 h-6' />,
+            title: language === "en" ? "Planning & Organization" : "التخطيط والتنظيم",
+            description:
+                language === "en" ? "Stay organized with calendars and schedules" : "ابق منظمًا مع التقويمات والجداول",
+            screenshots: [
+                {
+                    id: 4,
+                    path: "/images/screenshots/screen4.jpeg",
+                    title: language === "en" ? "Events Calendar" : "تقويم الأحداث",
+                    desc: language === "en" ? "Never miss important events" : "لا تفوت الأحداث المهمة أبدًا",
+                },
+                {
+                    id: 7,
+                    path: "/images/screenshots/screen7.jpeg",
+                    title: language === "en" ? "Weekly Calendar" : "التقويم الأسبوعي",
+                    desc: language === "en" ? "Plan your week effectively" : "خطط لأسبوعك بفعالية",
+                },
+            ],
+        },
+        {
+            id: 3,
+            icon: <Users className='w-6 h-6' />,
+            title: language === "en" ? "Family Connection" : "التواصل العائلي",
+            description:
+                language === "en" ? "Stay connected with family conversations" : "ابق على تواصل مع محادثات العائلة",
+            screenshots: [
+                {
+                    id: 6,
+                    path: "/images/screenshots/screen6.jpeg",
+                    title: language === "en" ? "Family Page" : "صفحة العائلة",
+                    desc: language === "en" ? "Your family hub" : "مركز عائلتك",
+                },
+                {
+                    id: 5,
+                    path: "/images/screenshots/screen5.jpeg",
+                    title: language === "en" ? "Conversations" : "المحادثات",
+                    desc: language === "en" ? "Chat and share updates" : "تحدث وشارك التحديثات",
+                },
+            ],
+        },
+    ];
 
     const features = [
         {
@@ -80,6 +186,22 @@ function HomePage() {
         return () => clearInterval(interval);
     }, [features.length]);
 
+    // Auto-rotate hero screenshots
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentScreenshot((prev) => (prev + 1) % heroScreenshots.length);
+        }, 4000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const nextCategory = () => {
+        setActiveCategory((prev) => (prev + 1) % featureCategories.length);
+    };
+
+    const prevCategory = () => {
+        setActiveCategory((prev) => (prev - 1 + featureCategories.length) % featureCategories.length);
+    };
+
     return (
         <div className='home-page'>
             {/* Hero Section */}
@@ -109,18 +231,6 @@ function HomePage() {
 
                         <p className='hero-description'>{t("heroSubtitle")}</p>
 
-                        {/* <div className='hero-cta'>
-                            <button className='primary-cta'>
-                                <Smartphone className='w-5 h-5' />
-                                {t("downloadApp")}
-                                <ArrowRight className='w-5 h-5' />
-                            </button>
-                            <button className='secondary-cta'>
-                                <Play className='w-5 h-5' />
-                                {language === "en" ? "Watch Demo" : "شاهد العرض"}
-                            </button>
-                        </div> */}
-
                         <div className='app-badges'>
                             <a href='https://apps.apple.com/ae/app/mobdeen/id6744346013' className='app-badge'>
                                 <Apple className='w-6 h-6' />
@@ -147,9 +257,28 @@ function HomePage() {
                     </div>
 
                     <div className='hero-visual'>
-                        <div className='phone-mockup'>
+                        <div className='phone-mockup enhanced'>
                             <div className='phone-screen'>
-                                <img src='/images/app.jpeg' alt='Mobdeen App' />
+                                <div className='screenshot-carousel'>
+                                    {heroScreenshots.map((screenshot, index) => (
+                                        <img
+                                            key={screenshot.id}
+                                            src={screenshot.path}
+                                            alt={screenshot.title}
+                                            className={`hero-screenshot ${index === currentScreenshot ? "active" : ""}`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                            <div className='screenshot-dots'>
+                                {heroScreenshots.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        className={`dot ${index === currentScreenshot ? "active" : ""}`}
+                                        onClick={() => setCurrentScreenshot(index)}
+                                        aria-label={`Screenshot ${index + 1}`}
+                                    />
+                                ))}
                             </div>
                         </div>
                         <div className='floating-icons'>
@@ -179,6 +308,100 @@ function HomePage() {
                             <p className='stat-label'>{stat.label}</p>
                         </div>
                     ))}
+                </div>
+            </section>
+
+            {/* Features in Action - New Section */}
+            <section className='features-in-action'>
+                <div className='features-action-container'>
+                    <div className='section-header'>
+                        <h2 className='section-title'>
+                            {language === "en" ? "See Mobdeen" : "شاهد مبدعين"}
+                            <span className='gradient-text'>{language === "en" ? " in Action" : " في العمل"}</span>
+                        </h2>
+                        <p className='section-subtitle'>
+                            {language === "en"
+                                ? "Explore how families transform their daily routines with our powerful features"
+                                : "اكتشف كيف تحول العائلات روتينها اليومي مع ميزاتنا القوية"}
+                        </p>
+                    </div>
+
+                    <div className='feature-showcase'>
+                        <div className='showcase-sidebar'>
+                            {featureCategories.map((category, index) => (
+                                <button
+                                    key={category.id}
+                                    className={`category-button ${activeCategory === index ? "active" : ""}`}
+                                    onClick={() => setActiveCategory(index)}
+                                >
+                                    <div className='category-icon'>{category.icon}</div>
+                                    <div className='category-content'>
+                                        <h4>{category.title}</h4>
+                                        <p>{category.description}</p>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className='showcase-main'>
+                            <div className='showcase-header'>
+                                <button className='nav-arrow prev' onClick={prevCategory}>
+                                    <ChevronLeft className='w-5 h-5' />
+                                </button>
+                                <h3>{featureCategories[activeCategory].title}</h3>
+                                <button className='nav-arrow next' onClick={nextCategory}>
+                                    <ChevronRight className='w-5 h-5' />
+                                </button>
+                            </div>
+
+                            <div className='screenshots-display'>
+                                {featureCategories[activeCategory].screenshots.map((screenshot, index) => (
+                                    <div key={screenshot.id} className='screenshot-item'>
+                                        <div className='device-frame'>
+                                            <img
+                                                src={screenshot.path}
+                                                alt={screenshot.title}
+                                                className='app-screenshot'
+                                            />
+                                        </div>
+                                        <div className='screenshot-info'>
+                                            <h4>{screenshot.title}</h4>
+                                            <p>{screenshot.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Mobile View */}
+                    <div className='feature-showcase-mobile'>
+                        <div className='mobile-categories'>
+                            {featureCategories.map((category, index) => (
+                                <button
+                                    key={category.id}
+                                    className={`mobile-category-tab ${activeCategory === index ? "active" : ""}`}
+                                    onClick={() => setActiveCategory(index)}
+                                >
+                                    {category.icon}
+                                    <span>{category.title}</span>
+                                </button>
+                            ))}
+                        </div>
+                        <div className='mobile-screenshots'>
+                            <div className='screenshots-row'>
+                                {featureCategories[activeCategory].screenshots.map((screenshot) => (
+                                    <div key={screenshot.id} className='mobile-screenshot'>
+                                        <div className='device-frame-mobile'>
+                                            <img src={screenshot.path} alt={screenshot.title} />
+                                        </div>
+                                        <h5>{screenshot.title}</h5>
+                                        <p>{screenshot.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
