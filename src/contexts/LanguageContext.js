@@ -164,59 +164,85 @@ const translations = {
         loginFailed: "Login failed. Please check your credentials.",
 
         // Privacy Policy
-        privacyPolicyTitle: 'Privacy Policy for "Mobdeen" App',
-        lastUpdated: "Last updated: 09-05-2025",
+        privacyPolicyTitle: "Privacy Policy – Mobdeen App",
+        lastUpdated: "Last updated: June 2025",
         privacyIntro:
-            "Welcome to Mobdeen – a smart family management app that helps parents assign tasks, track progress, and reward their children. We take your privacy and your family's privacy seriously and are committed to protecting your data with transparency and care.",
+            'At "Mobdeen" app, we respect your privacy and are committed to protecting your data. This document explains how we collect, use, store, and protect user information.',
 
-        section1Title: "1. Information We Collect:",
-        accountInfo: "– Account Information: Name, email, date of birth, relationship, and profile photo.",
-        childInfo: "– Child Information (Creators): Name, gender, age, photo, and assigned activities.",
-        activityData:
-            "– Activity Data: Tasks, rewards, evaluations, behavior records, achievements, savings/spending (cookies).",
-        deviceData: "– Device Data: Device type, language, and operating system for support and security.",
-        paymentData: "– Payment Data: Managed via third-party providers like Stripe – we do not store card details.",
+        section1Title: "1. Data We Collect",
+        section1Content1: "Currently, we collect:",
+        section1List1: "• Name",
+        section1List2: "• Email",
+        section1Content2: "We do not collect or request any sensitive or private information about children directly.",
+        section1Content3:
+            "Users (mentors) may enter additional data within the app such as children's ages or daily tasks, and this data:",
+        section1SubList1: "• Is stored only in the database to enable app functionality",
+        section1SubList2: "• Cannot be accessed by app management, any employees, or supervisors",
+        section1SubList3: "• Is not used for any marketing or external analytical purposes",
 
-        section2Title: "2. How We Use the Data:",
-        useData1: "– Assign and customize tasks and rewards for children.",
-        useData2: "– Monitor family progress and behavior patterns.",
-        useData3: "– Provide smart recommendations using AI based on each child's profile.",
-        useData4: "– Send reminders and motivational notifications.",
-        useData5: "– Improve app performance through usage analytics.",
+        section2Title: "2. Use of Data",
+        section2Content: "We use data for the following purposes:",
+        section2List1: "• Account creation and login",
+        section2List2: "• Customizing the user experience within the app",
+        section2List3: "• Sending alert notifications (if enabled)",
+        section2List4: "• Providing technical support when needed",
 
-        section3Title: "3. AI-Based Educational Assistant:",
-        section3Content:
-            "We use AI technologies like ChatGPT to provide personalized parenting advice based on user behavior. This data is not shared externally.",
+        section3Title: "3. Data Protection",
+        section3Content1: "We follow best practices to secure your data, including:",
+        section3List1: "• Encryption during storage and transmission",
+        section3List2: "• Not storing passwords as plain text",
+        section3List3: "• Completely restricting access to sensitive data",
+        section3Important:
+            'We confirm that activity data, tasks, children\'s ages, or any information entered within the app cannot be accessed or viewed by any employee, supervisor, or even the founder of the "Mobdeen" app itself.',
+        section3Content2:
+            "This data is stored exclusively in the database for display within the user's account only, and is not used outside this framework under any circumstances.",
 
-        section4Title: "4. Data Sharing:",
-        section4Content: "We do not sell or commercially share your data. Limited sharing occurs only with:",
-        section4Item1: "– Service providers (payment, hosting, analytics).",
-        section4Item2: "– Government or legal entities upon official request.",
+        section4Title: "4. Limitation of Liability",
+        section4List1: "• The user is solely responsible for the accuracy and validity of the data they enter",
+        section4List2:
+            "• Entering sensitive information (such as addresses, personal photos of children, or identification numbers) within activities is prohibited unless educationally necessary and under user supervision",
+        section4List3:
+            "• The app is used only as an educational assistant and is not considered an official psychological or behavioral assessment tool",
 
-        section5Title: "5. Data Protection:",
-        protection1: "– Encrypted data storage.",
-        protection2: "– Secured servers (e.g., Digital Ocean).",
-        protection3: "– Automated backups.",
-        protection4: "– Role-based access control for sensitive data.",
+        section5Title: "5. Children's Use",
+        section5List1:
+            '• The "Mobdeen" app is not directed for direct use by children, and requires that each account be supervised by a responsible adult (mentor)',
+        section5List2: "• Creating accounts by children without direct supervision is not allowed",
+        section5List3:
+            "• If we discover direct use by a child without supervision, we have the right to immediately cancel the account without notice",
 
-        section6Title: "6. Your Rights:",
-        rights1: "– Edit or delete your family and child profiles.",
-        rights2: "– Export your data upon request.",
-        rights3: "– Control notifications and privacy settings.",
+        section6Title: "6. Third-Party Services",
+        section6Content1: "We may use trusted external services for some current or future features such as:",
+        section6List1: "• Firebase Cloud Messaging (for sending notifications)",
+        section6List2: "• Stripe (for completing payment transactions)",
+        section6List3: "• Google Analytics (for aggregate usage analysis – without personal data)",
+        section6List4: "• OpenAI or AI services (for data analysis or responses within the app)",
+        section6Content2:
+            "All processing through these services is done under strict controls, and no personal content is shared with these parties except indirectly for the purpose of performing required functions only.",
+        section6Content3:
+            "These parties are bound by their own privacy policies, and the user implicitly agrees to the use of these services when using the app.",
 
-        section7Title: "7. Cookies:",
-        section7Content: "We use cookies for in-app performance improvement only – not for advertising or tracking.",
+        section7Title: "7. Aggregate (Non-Personal) Data",
+        section7Content1:
+            "We reserve the right to analyze abstract data not linked to user identity (such as number of completed tasks or most used activity types) for purposes of:",
+        section7List1: "• Improving the app experience",
+        section7List2: "• Developing future educational AI features",
+        section7Content2: "This data is not used to identify any specific user.",
 
-        section8Title: "8. Subscription Plans:",
-        section8Content:
-            "We offer free and premium plans. Premium features include smart reports and parenting consultations. All payments are processed securely.",
+        section8Title: "8. User Rights",
+        section8List1: "• Users have the right to modify their data or delete their account entirely at any time",
+        section8List2:
+            "• They can request a copy of their recorded data or permanently delete it by contacting the support team",
 
-        section9Title: "9. Account Deletion:",
-        section9Content: "You may delete your account via settings. All associated data will be erased within 30 days.",
+        section9Title: "9. Policy Modifications",
+        section9Content:
+            "We reserve the right to modify this policy at any time, and users will be notified of any material changes via email or within the app.",
 
-        section10Title: "10. Contact Us:",
-        contactEmail: "– Email: support@mobdeen.com",
-        contactPhone: "– Phone: +971-528-978888",
+        section10Title: "10. Contact Us",
+        section10Content: "For any inquiries regarding the privacy policy, please contact us via:",
+        contactEmail: "📧 Email: info@mobdeen.com",
+        contactWhatsApp: "💬 WhatsApp Support:",
+        contactThankYou: 'Thank you for choosing "Mobdeen". We believe that privacy begins with trust.',
 
         // Footer
         footerDescription: "Smart family management app for better parenting",
@@ -321,6 +347,135 @@ const translations = {
         parent: "Parent",
         child: "Child",
         admin: "Admin",
+
+        // Terms and Conditions
+        termsAndConditionsTitle: "Terms and Conditions",
+        termsIntro: 'Welcome to the "Mobdeen" app. By using the app, you agree to the following terms:',
+
+        section1Title: "1. Definitions",
+        definitionApp:
+            '– App: "Mobdeen", a smart educational system for managing tasks and evaluating and developing children or students.',
+        definitionGuide: "– Guide: Any educational supervisor such as a parent, teacher, supervisor, or coach.",
+        definitionCreator: "– Creator: The child or student being followed within the app.",
+        definitionCookies: "– Cookies: Virtual currency within the app used as rewards for achievement.",
+
+        section2Title: "2. Scope of Use",
+        scopeOfUse1:
+            "– The app is aimed at individuals and educational institutions, and can be used in homes, schools, centers, or any educational environment.",
+        scopeOfUse2: "– The supervising user must be actually responsible for the target group (children or students).",
+        scopeOfUse3: "– It is prohibited to use the app for any non-educational purpose or contrary to public morals.",
+
+        section3Title: "3. Data and Privacy",
+        dataPrivacy1: "– We are committed to protecting the privacy of user data.",
+        dataPrivacy2: "– Data is not sold or shared with any third party except with user consent or by legal order.",
+        dataPrivacy3: "– Data may be used to improve the service and provide personalized content.",
+
+        section4Title: "4. Subscription Features",
+        freePlanTitle: "🆓 Free Plan (30 days):",
+        freePlanContent: "– All users can try the app with all its features for 30 days for free.",
+        paidPlanTitle: "💳 Paid Plan:",
+        paidPlanIntro:
+            "– After the free month ends, the annual subscription plan is automatically activated with fees: 365 AED per year (1 AED per day).",
+        paidPlanFeatures: "– Paid features include:",
+        feature1: "Daily progress summary",
+        feature2: "Automatic task locking",
+        feature3: "Automatic application of educational penalties",
+        feature4: "Sending weekly educational values",
+        feature5: "Activating in-app chat",
+        feature6: "Uploading photos, audio, video within tasks",
+        feature7: "Attaching files and documents",
+        feature8: "Detailed behavioral reports and indicators",
+        feature9: "Direct technical support via WhatsApp",
+
+        section5Title: "5. Payment and Cancellation",
+        paymentCancellation1: "– Payment is made once per year of subscription.",
+        paymentCancellation2:
+            "– The subscription value is not refunded after activation except in case of a technical error proven by technical support.",
+        paymentCancellation3:
+            "– Subscription can be cancelled at any time, with continued access until the end of the paid period.",
+
+        section6Title: "6. Intellectual Property",
+        intellectualProperty1: '– All intellectual rights are reserved for the "Mobdeen" app.',
+        intellectualProperty2:
+            "– It is prohibited to copy or reuse the content, interface, programming, or cookies system without official permission.",
+
+        section7Title: "7. Disclaimer",
+        disclaimer1:
+            "– The app provides supportive educational tools, and is not a substitute for direct human supervision.",
+        disclaimer2: "– The app bears no educational or legal responsibility resulting from misuse by users.",
+
+        section8Title: "8. Modifications",
+        modifications:
+            "– We reserve the right to modify the terms, prices, or features at any time with notification to users within the app.",
+
+        section9Title: "9. Technical Support and Contact",
+        supportEmail: "– 📧 Email: info@mobdeen.com",
+        supportWhatsapp: "– 💬 WhatsApp Support: https://wa.me/971528978888",
+
+        // Terms and Conditions
+        termsTitle: "Terms and Conditions",
+        termsIntro: 'Welcome to "Mobdeen" app. By using the app, you agree to the following terms:',
+
+        terms1Title: "1. Definitions",
+        terms1App:
+            '• App: "Mobdeen", an intelligent educational system for task management and evaluation and development of children or students.',
+        terms1Mentor: "• Mentor: Any educational supervisor such as a parent, teacher, supervisor, or coach.",
+        terms1Creator: "• Creator: The child or student being monitored within the app.",
+        terms1Cookies: "• Cookies: Virtual currency within the app used as rewards for achievements.",
+
+        terms2Title: "2. Scope of Use",
+        terms2Content1:
+            "• The app is intended for individuals and educational institutions, and can be used in homes, schools, centers, or any educational environment.",
+        terms2Content2:
+            "• The supervising user must be actually responsible for the target group (children or students).",
+        terms2Content3: "• Using the app for any non-educational purpose or contrary to public morals is prohibited.",
+
+        terms3Title: "3. Data and Privacy",
+        terms3Content1: "• We are committed to protecting users' data privacy.",
+        terms3Content2: "• Data is not sold or shared with any third party except with user consent or legal order.",
+        terms3Content3: "• Data may be used to improve the service and provide personalized content.",
+
+        terms4Title: "4. Subscription Features",
+        terms4FreeTitle: "Free Plan (30 days):",
+        terms4FreeContent: "• All users can try the app with all its features for 30 days free.",
+        terms4PaidTitle: "Paid Plan:",
+        terms4PaidContent1:
+            "• After the free month ends, the annual subscription plan is automatically activated with fees:",
+        terms4PaidContent2: "  365 AED per year (1 AED per day).",
+        terms4Feature1: "• Daily progress summary",
+        terms4Feature2: "• Automatic task locking",
+        terms4Feature3: "• Automatic educational penalties application",
+        terms4Feature4: "• Weekly educational values sending",
+        terms4Feature5: "• In-app chat activation",
+        terms4Feature6: "• Upload photos, audio, video within tasks",
+        terms4Feature7: "• Attach files and documents",
+        terms4Feature8: "• Detailed behavioral reports and indicators",
+        terms4Feature9: "• Direct technical support via WhatsApp",
+
+        terms5Title: "5. Payment and Cancellation",
+        terms5Content1: "• Payment is made once for each subscription year.",
+        terms5Content2:
+            "• The subscription value is not refunded after activation except in case of a technical error proven by technical support.",
+        terms5Content3:
+            "• Subscription can be cancelled at any time, with access continuing until the end of the paid period.",
+
+        terms6Title: "6. Intellectual Property",
+        terms6Content1: '• All intellectual property rights are reserved for "Mobdeen" app.',
+        terms6Content2:
+            "• Copying or reusing content, interface, programming, or cookies system without official permission is prohibited.",
+
+        terms7Title: "7. Disclaimer",
+        terms7Content1:
+            "• The app provides supportive educational tools and is not a substitute for direct human supervision.",
+        terms7Content2: "• The app bears no educational or legal responsibility resulting from misuse by users.",
+
+        terms8Title: "8. Modifications",
+        terms8Content:
+            "• We reserve the right to modify terms, prices, or features at any time with notification to users within the app.",
+
+        terms9Title: "9. Technical Support and Contact",
+        termsContactEmail: "📧 Email: info@mobdeen.com",
+        termsContactWhatsApp: "💬 WhatsApp Support:",
     },
     ar: {
         // Header & Navigation
@@ -442,59 +597,82 @@ const translations = {
         loginFailed: "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك.",
 
         // Privacy Policy
-        privacyPolicyTitle: 'سياسة الخصوصية لتطبيق "مبدعين"',
-        lastUpdated: "آخر تحديث: 09-05-2025",
+        privacyPolicyTitle: "سياسة الخصوصية – تطبيق مبدعين (Mobdeen)",
+        lastUpdated: "آخر تحديث: يونيو 2025",
         privacyIntro:
-            "مرحبًا بكم في مبدعين – تطبيق إدارة العائلة الذكي الذي يساعد الوالدين على تعيين المهام وتتبع التقدم ومكافأة أطفالهم. نحن نأخذ خصوصيتك وخصوصية عائلتك على محمل الجد ونلتزم بحماية بياناتك بشفافية وعناية.",
+            'نحن في تطبيق "مبدعين – Mobdeen" نحترم خصوصيتك وملتزمون بحماية بياناتك. توضح هذه الوثيقة كيف نقوم بجمع واستخدام وتخزين وحماية معلومات المستخدمين.',
 
-        section1Title: "1. المعلومات التي نجمعها:",
-        accountInfo: "– معلومات الحساب: الاسم، البريد الإلكتروني، تاريخ الميلاد، العلاقة، وصورة الملف الشخصي.",
-        childInfo: "– معلومات الطفل (المنشئون): الاسم، الجنس، العمر، الصورة، والأنشطة المخصصة.",
-        activityData:
-            "– بيانات النشاط: المهام، المكافآت، التقييمات، سجلات السلوك، الإنجازات، المدخرات/الإنفاق (الكوكيز).",
-        deviceData: "– بيانات الجهاز: نوع الجهاز، اللغة، ونظام التشغيل للدعم والأمان.",
-        paymentData: "– بيانات الدفع: تُدار عبر مقدمي خدمات خارجيين مثل Stripe – لا نخزن تفاصيل البطاقة.",
+        section1Title: "1. البيانات التي نجمعها",
+        section1Content1: "في الوقت الحالي، نقوم بجمع:",
+        section1List1: "• الاسم",
+        section1List2: "• البريد الإلكتروني",
+        section1Content2: "ولا نقوم بجمع أو طلب أي معلومات حساسة أو خاصة عن الأطفال بشكل مباشر.",
+        section1Content3:
+            "قد يُدخل المستخدم (المرشد) داخل التطبيق بيانات إضافية مثل أعمار الأطفال أو المهام اليومية، وهذه البيانات:",
+        section1SubList1: "• تُخزن فقط في قاعدة البيانات لتفعيل وظائف التطبيق",
+        section1SubList2: "• لا يمكن لإدارة التطبيق أو أي من موظفيه أو المشرفين الاطلاع عليها",
+        section1SubList3: "• لا تُستخدم لأي غرض تسويقي أو تحليلي خارجي",
 
-        section2Title: "2. كيف نستخدم البيانات:",
-        useData1: "– تعيين وتخصيص المهام والمكافآت للأطفال.",
-        useData2: "– مراقبة تقدم العائلة وأنماط السلوك.",
-        useData3: "– تقديم توصيات ذكية باستخدام الذكاء الاصطناعي بناءً على ملف كل طفل.",
-        useData4: "– إرسال التذكيرات والإشعارات التحفيزية.",
-        useData5: "– تحسين أداء التطبيق من خلال تحليلات الاستخدام.",
+        section2Title: "2. استخدام البيانات",
+        section2Content: "نستخدم البيانات للأغراض التالية:",
+        section2List1: "• إنشاء الحساب وتسجيل الدخول",
+        section2List2: "• تخصيص تجربة المستخدم داخل التطبيق",
+        section2List3: "• إرسال إشعارات تنبيهية (إن تم تفعيلها)",
+        section2List4: "• تقديم الدعم الفني في حال الحاجة",
 
-        section3Title: "3. المساعد التعليمي القائم على الذكاء الاصطناعي:",
-        section3Content:
-            "نستخدم تقنيات الذكاء الاصطناعي مثل ChatGPT لتقديم نصائح تربوية مخصصة بناءً على سلوك المستخدم. لا تتم مشاركة هذه البيانات خارجيًا.",
+        section3Title: "3. حماية البيانات",
+        section3Content1: "نتبع أفضل الممارسات لتأمين بياناتك، بما في ذلك:",
+        section3List1: "• التشفير عند التخزين والنقل",
+        section3List2: "• عدم تخزين كلمات المرور كنص واضح",
+        section3List3: "• تقييد الوصول إلى البيانات الحساسة بالكامل",
+        section3Important:
+            'نؤكد أن بيانات الأنشطة، المهام، أعمار الأطفال، أو أي معلومات يتم إدخالها داخل التطبيق لا يمكن لأي موظف، أو مشرف، أو حتى مؤسس تطبيق "مبدعين" نفسه الاطلاع عليها أو الوصول إليها.',
+        section3Content2:
+            "يتم تخزين هذه البيانات حصريًا في قاعدة البيانات لعرضها داخل حساب المستخدم فقط، ولا تُستخدم خارج هذا الإطار تحت أي ظرف.",
 
-        section4Title: "4. مشاركة البيانات:",
-        section4Content: "نحن لا نبيع أو نشارك بياناتك تجاريًا. تحدث المشاركة المحدودة فقط مع:",
-        section4Item1: "– مقدمي الخدمات (الدفع، الاستضافة، التحليلات).",
-        section4Item2: "– الجهات الحكومية أو القانونية بناءً على طلب رسمي.",
+        section4Title: "4. حدود المسؤولية",
+        section4List1: "• يتحمل المستخدم وحده المسؤولية عن دقة وصحة البيانات التي يدخلها",
+        section4List2:
+            "• يُمنع إدخال معلومات حساسة (مثل العناوين، الصور الشخصية للأطفال، أو الأرقام التعريفية) داخل الأنشطة ما لم تكن ضرورية تربويًا وتحت إشراف المستخدم",
+        section4List3: "• التطبيق يُستخدم فقط كمساعد تربوي، ولا يُعتبر أداة تقييم نفسي أو سلوكي رسمية",
 
-        section5Title: "5. حماية البيانات:",
-        protection1: "– تخزين البيانات المشفرة.",
-        protection2: "– خوادم مؤمنة (مثل Digital Ocean).",
-        protection3: "– نسخ احتياطية تلقائية.",
-        protection4: "– التحكم في الوصول القائم على الأدوار للبيانات الحساسة.",
+        section5Title: "5. استخدام الأطفال",
+        section5List1:
+            '• تطبيق "مبدعين" لا يُوجّه للاستخدام المباشر من الأطفال، ويُشترط أن يكون كل حساب بإشراف بالغ راشد (المرشد)',
+        section5List2: "• لا يُسمح بإنشاء حسابات من قبل أطفال دون إشراف مباشر",
+        section5List3: "• في حال اكتشفنا استخدامًا مباشرًا من قبل طفل دون إشراف، يحق لنا إلغاء الحساب فورًا دون إشعار",
 
-        section6Title: "6. حقوقك:",
-        rights1: "– تعديل أو حذف ملفات تعريف العائلة والطفل.",
-        rights2: "– تصدير بياناتك عند الطلب.",
-        rights3: "– التحكم في الإشعارات وإعدادات الخصوصية.",
+        section6Title: "6. خدمات الطرف الثالث",
+        section6Content1: "قد نستعين في بعض الميزات الحالية أو المستقبلية بخدمات خارجية موثوقة مثل:",
+        section6List1: "• Firebase Cloud Messaging (لإرسال الإشعارات)",
+        section6List2: "• Stripe (لإتمام عمليات الدفع)",
+        section6List3: "• Google Analytics (لتحليل الاستخدام المجمع – بدون بيانات شخصية)",
+        section6List4: "• OpenAI أو خدمات الذكاء الاصطناعي (لتحليل البيانات أو الردود داخل التطبيق)",
+        section6Content2:
+            "تتم جميع عمليات المعالجة عبر هذه الخدمات ضمن ضوابط مشددة، ولا يُشارك أي محتوى شخصي مع هذه الجهات إلا بشكل غير مباشر لغرض تنفيذ الوظائف المطلوبة فقط.",
+        section6Content3:
+            "تلتزم هذه الجهات بسياساتها الخاصة للخصوصية، والمستخدم يوافق ضمنيًا على استخدام هذه الخدمات عند استخدام التطبيق.",
 
-        section7Title: "7. ملفات تعريف الارتباط:",
-        section7Content: "نستخدم ملفات تعريف الارتباط لتحسين الأداء داخل التطبيق فقط – وليس للإعلان أو التتبع.",
+        section7Title: "7. البيانات المجمعة (غير الشخصية)",
+        section7Content1:
+            "نحتفظ بحق تحليل البيانات المجردة غير المرتبطة بهوية المستخدم (مثل عدد المهام المنفذة أو نوع الأنشطة الأكثر استخدامًا) لأغراض:",
+        section7List1: "• تحسين تجربة التطبيق",
+        section7List2: "• تطوير ميزات ذكاء اصطناعي تربوي مستقبلية",
+        section7Content2: "ولا تُستخدم هذه البيانات لتحديد أي مستخدم بعينه.",
 
-        section8Title: "8. خطط الاشتراك:",
-        section8Content:
-            "نقدم خططًا مجانية ومميزة. تتضمن الميزات المميزة تقارير ذكية واستشارات تربوية. تتم معالجة جميع المدفوعات بشكل آمن.",
+        section8Title: "8. حقوق المستخدم",
+        section8List1: "• يحق للمستخدم تعديل بياناته أو حذف حسابه بالكامل في أي وقت",
+        section8List2: "• يمكنه طلب نسخة من بياناته المسجلة أو حذفها نهائيًا عبر التواصل مع فريق الدعم",
 
-        section9Title: "9. حذف الحساب:",
-        section9Content: "يمكنك حذف حسابك عبر الإعدادات. سيتم محو جميع البيانات المرتبطة خلال 30 يومًا.",
+        section9Title: "9. التعديلات على السياسة",
+        section9Content:
+            "نحتفظ بالحق في تعديل هذه السياسة في أي وقت، ويتم إشعار المستخدمين بأي تغيير جوهري عبر البريد أو داخل التطبيق.",
 
-        section10Title: "10. اتصل بنا:",
-        contactEmail: "– البريد الإلكتروني: support@mobdeen.com",
-        contactPhone: "– الهاتف: +971-528-978888",
+        section10Title: "10. التواصل معنا",
+        section10Content: "لأي استفسار بخصوص سياسة الخصوصية، يرجى التواصل معنا عبر:",
+        contactEmail: "📧 البريد الإلكتروني: info@mobdeen.com",
+        contactWhatsApp: "💬 واتساب الدعم:",
+        contactThankYou: 'شكراً لاختيارك "مبدعين". نحن نؤمن أن الخصوصية تبدأ من الثقة.',
 
         // Footer
         footerDescription: "تطبيق إدارة العائلة الذكي لتربية أفضل",
@@ -599,5 +777,62 @@ const translations = {
         parent: "والد",
         child: "طفل",
         admin: "مدير",
+
+        // Terms and Conditions
+        termsTitle: "الشروط والأحكام",
+        termsIntro: 'مرحبًا بك في تطبيق "مبدعين – Mobdeen". باستخدامك للتطبيق، فإنك توافق على الشروط التالية:',
+
+        terms1Title: "1. التعريفات",
+        terms1App: '• التطبيق: "مبدعين – Mobdeen"، نظام تربوي ذكي لإدارة المهام وتقييم وتطوير الأطفال أو الطلاب.',
+        terms1Mentor: "• المرشد: أي شخص مشرف تربوي مثل ولي أمر، معلم، مشرفة، أو مدرب.",
+        terms1Creator: "• المبدع: الطفل أو الطالب الذي تتم متابعته داخل التطبيق.",
+        terms1Cookies: "• الكوكيز: عملة افتراضية داخل التطبيق تُستخدم كمكافآت للإنجاز.",
+
+        terms2Title: "2. نطاق الاستخدام",
+        terms2Content1:
+            "• التطبيق موجه للأفراد والمؤسسات التربوية، ويمكن استخدامه في المنازل، المدارس، المراكز، أو أي بيئة تعليمية.",
+        terms2Content2: "• يجب أن يكون المستخدم المشرف مسؤولًا فعليًا عن المجموعة المستهدفة (أطفال أو طلاب).",
+        terms2Content3: "• يُحظر استخدام التطبيق لأي غرض غير تربوي أو مخالف للأخلاق العامة.",
+
+        terms3Title: "3. البيانات والخصوصية",
+        terms3Content1: "• نلتزم بحماية خصوصية بيانات المستخدمين.",
+        terms3Content2: "• لا يتم بيع أو مشاركة البيانات مع أي طرف خارجي إلا بموافقة المستخدم أو بأمر قانوني.",
+        terms3Content3: "• قد تُستخدم البيانات لتحسين الخدمة وتقديم محتوى مخصص.",
+
+        terms4Title: "4. ميزات الاشتراك",
+        terms4FreeTitle: "الخطة المجانية (30 يومًا):",
+        terms4FreeContent: "• يمكن لجميع المستخدمين تجربة التطبيق بكامل ميزاته لمدة 30 يومًا مجانًا.",
+        terms4PaidTitle: "الخطة المدفوعة:",
+        terms4PaidContent1: "• بعد نهاية الشهر المجاني، يتم تفعيل خطة الاشتراك السنوي تلقائيًا برسوم:",
+        terms4PaidContent2: "  365 درهم إماراتي للسنة (1 درهم في اليوم).",
+        terms4Feature1: "• ملخص يومي للتقدم",
+        terms4Feature2: "• قفل تلقائي للمهام",
+        terms4Feature3: "• تطبيق العقوبات التربوية تلقائيًا",
+        terms4Feature4: "• إرسال القيم التربوية الأسبوعية",
+        terms4Feature5: "• تفعيل الدردشة داخل التطبيق",
+        terms4Feature6: "• رفع الصور، الصوت، الفيديو داخل المهام",
+        terms4Feature7: "• إرفاق ملفات ومستندات",
+        terms4Feature8: "• تقارير ومؤشرات سلوكية تفصيلية",
+        terms4Feature9: "• دعم فني مباشر عبر واتساب",
+
+        terms5Title: "5. الدفع والإلغاء",
+        terms5Content1: "• يتم الدفع لمرة واحدة عن كل سنة اشتراك.",
+        terms5Content2: "• لا تُسترد قيمة الاشتراك بعد التفعيل إلا في حال وجود خطأ تقني يثبت من قبل الدعم الفني.",
+        terms5Content3: "• يمكن إلغاء الاشتراك في أي وقت، مع استمرار الوصول حتى نهاية الفترة المدفوعة.",
+
+        terms6Title: "6. الملكية الفكرية",
+        terms6Content1: '• جميع الحقوق الفكرية محفوظة لتطبيق "مبدعين".',
+        terms6Content2: "• يُمنع نسخ أو إعادة استخدام المحتوى أو الواجهة أو البرمجة أو نظام الكوكيز بدون تصريح رسمي.",
+
+        terms7Title: "7. إخلاء المسؤولية",
+        terms7Content1: "• التطبيق يقدم أدوات تربوية داعمة، وليس بديلاً عن الإشراف البشري المباشر.",
+        terms7Content2: "• لا يتحمل التطبيق أي مسؤولية تربوية أو قانونية ناتجة عن سوء الاستخدام من قِبل المستخدمين.",
+
+        terms8Title: "8. التعديلات",
+        terms8Content: "• نحتفظ بحق تعديل الشروط أو الأسعار أو الميزات في أي وقت مع إخطار المستخدمين داخل التطبيق.",
+
+        terms9Title: "9. الدعم الفني والتواصل",
+        termsContactEmail: "📧 البريد الإلكتروني: info@mobdeen.com",
+        termsContactWhatsApp: "💬 واتساب الدعم:",
     },
 };

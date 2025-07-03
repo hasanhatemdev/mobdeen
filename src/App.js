@@ -17,6 +17,7 @@ import LanguageSwitcher from "./components/LanguageSwitcher";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { useAuth } from "./hooks/useAuth";
 import "./App.css";
+import TermsConditions from "./components/TermsConditions";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -84,6 +85,14 @@ function App() {
                             element={
                                 <PublicLayout>
                                     <PrivacyPolicy />
+                                </PublicLayout>
+                            }
+                        />
+                        <Route
+                            path='/terms-conditions'
+                            element={
+                                <PublicLayout>
+                                    <TermsConditions />
                                 </PublicLayout>
                             }
                         />
