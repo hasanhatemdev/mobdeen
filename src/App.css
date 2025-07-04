@@ -722,6 +722,7 @@ body.arabic .info-item span[dir="ltr"] {
 }
 
 /* Website Header Styles */
+/* Website Header Styles */
 .website-header {
     background: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -737,6 +738,7 @@ body.arabic .info-item span[dir="ltr"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .website-header .logo img {
@@ -787,6 +789,130 @@ body.arabic .info-item span[dir="ltr"] {
 .website-header .language-switcher {
     position: static;
     margin: 0;
+}
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: #333;
+    width: auto;
+    height: auto;
+    transition: color 0.3s;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu-toggle svg {
+    pointer-events: none;
+}
+
+.mobile-menu-toggle:hover {
+    color: #ebbd00;
+    background: none;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+/* Mobile Header Responsive Styles */
+@media (max-width: 768px) {
+    /* Show burger menu button on mobile */
+    .mobile-menu-toggle {
+        display: flex;
+        z-index: 1001;
+    }
+
+    /* Mobile navigation drawer */
+    .website-header .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 5rem 2rem 2rem;
+        gap: 1.5rem;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease-in-out;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    /* RTL support for mobile menu */
+    html[dir="rtl"] .website-header .nav-links {
+        right: auto;
+        left: -100%;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: left 0.3s ease-in-out;
+    }
+
+    /* Show mobile menu when open */
+    .website-header .nav-links.mobile-open {
+        right: 0;
+    }
+
+    html[dir="rtl"] .website-header .nav-links.mobile-open {
+        left: 0;
+    }
+
+    /* Mobile nav link styles */
+    .website-header .nav-link {
+        width: 100%;
+        text-align: left;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 1.1rem;
+    }
+
+    html[dir="rtl"] .website-header .nav-link {
+        text-align: right;
+    }
+
+    /* Mobile login button */
+    .website-header .login-link {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        margin-top: 1rem;
+    }
+
+    /* Mobile language switcher */
+    .website-header .language-switcher {
+        width: 100%;
+        justify-content: center;
+        position: static;
+        margin-top: 1rem;
+        box-shadow: none;
+        border: 2px solid #ebbd00;
+    }
+
+    /* Show overlay when menu is open */
+    .mobile-menu-overlay {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .nav-links.mobile-open ~ .mobile-menu-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
 /* Main Content for Website Pages */
@@ -1807,14 +1933,6 @@ body.arabic .app-badge div {
         flex-direction: column;
     }
 
-    .website-header .header-container {
-        padding: 1rem;
-    }
-
-    .website-header .nav-links {
-        gap: 1rem;
-    }
-
     /* Home Page Mobile */
     .hero-title {
         font-size: 2.5rem;
@@ -1920,18 +2038,6 @@ body.arabic .app-badge div {
 }
 
 @media (max-width: 480px) {
-    .website-header .nav-links {
-        gap: 0.5rem;
-    }
-
-    .website-header .nav-link {
-        font-size: 0.9rem;
-    }
-
-    .website-header .login-link {
-        padding: 0.4rem 1rem;
-    }
-
     .hero-section {
         padding: 2rem 1rem;
     }
@@ -1975,6 +2081,10 @@ body.arabic .app-badge div {
     }
 
     .nav-buttons {
+        justify-content: center;
+    }
+
+    .contact-item {
         justify-content: center;
     }
 }
