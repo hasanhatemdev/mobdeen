@@ -211,8 +211,8 @@ function Subscriptions() {
                         <div className='price-section'>
                             {plan.discount_percent > 0 ? (
                                 <>
-                                    <span className='original-price'>${plan.price}</span>
-                                    <span className='discounted-price'>${plan.discounted_price}</span>
+                                    <span className='original-price'>${plan.price / 100}</span>
+                                    <span className='discounted-price'>${plan.discounted_price / 100}</span>
                                     <span className='discount-badge'>
                                         {t("discount")} {plan.discount_percent}%
                                     </span>

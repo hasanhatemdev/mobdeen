@@ -132,8 +132,20 @@ function Footer() {
                                 : "احصل على التطبيق وابدأ رحلة عائلتك اليوم!"}
                         </p>
                         <div className='app-store-badges'>
-                            <img src='/images/apple-store.png' alt='Download on App Store' className='store-badge' />
-                            <img src='/images/google-play.png' alt='Get it on Google Play' className='store-badge' />
+                            <a target='_blank' href='https://apps.apple.com/ae/app/mobdeen/id6744346013'>
+                                <img
+                                    src='/images/apple-store.png'
+                                    alt='Download on App Store'
+                                    className='store-badge'
+                                />
+                            </a>
+                            <a target='_blank' href='https://play.google.com/store/apps/details?id=com.aroom.aielty'>
+                                <img
+                                    src='/images/google-play.png'
+                                    alt='Get it on Google Play'
+                                    className='store-badge'
+                                />
+                            </a>
                         </div>
                     </div>
                 </div>

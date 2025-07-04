@@ -1052,7 +1052,6 @@ body.arabic .info-item span[dir="ltr"] {
 .hero-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 4rem 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
@@ -1460,7 +1459,6 @@ body.arabic .app-badge div {
     position: absolute;
     background: white;
     border-radius: 20px;
-    padding: 1.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
@@ -1470,12 +1468,14 @@ body.arabic .app-badge div {
 }
 
 .card-1 {
+    padding: 1.5rem;
     top: 50px;
     left: 0;
     animation: floatCard 4s ease-in-out infinite;
 }
 
 .card-2 {
+    padding: 1.5rem;
     top: 200px;
     right: 0;
     animation: floatCard 4s ease-in-out infinite 1s;
@@ -1490,8 +1490,13 @@ body.arabic .app-badge div {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #ebbd00 0%, #ffa500 100%);
+    /* background: linear-gradient(135deg, #ebbd00 0%, #ffa500 100%); */
     color: white;
+}
+.card-3 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @keyframes floatCard {

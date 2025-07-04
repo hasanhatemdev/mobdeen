@@ -604,10 +604,17 @@ function HomePage() {
                             </div>
 
                             <div className='pricing-cta'>
-                                <button className='cta-button pricing-button'>
+                                <a
+                                    href='https://mobdeen.app.link/'
+                                    target='_blank'
+                                    className='cta-button pricing-button'
+                                    style={{
+                                        textDecoration: "none",
+                                    }}
+                                >
                                     <Sparkles className='w-5 h-5' />
                                     {language === "en" ? "Start Your Free Trial" : "ابدأ تجربتك المجانية"}
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -621,14 +628,14 @@ function HomePage() {
                         <div className='benefit-image'>
                             <div className='benefit-card card-1'>
                                 <Award className='w-8 h-8' />
-                                <span>{language === "en" ? "Achievement Unlocked!" : "تم فتح الإنجاز!"}</span>
+                                <span>{language === "en" ? "Achievement Unlocked!" : "تم انجاز المهمة!"}</span>
                             </div>
                             <div className='benefit-card card-2'>
                                 <MessageCircle className='w-6 h-6' />
                                 <span>{language === "en" ? "Great job today!" : "عمل رائع اليوم!"}</span>
                             </div>
                             <div className='benefit-card card-3'>
-                                <Users className='w-10 h-10' />
+                                <img src='/images/boy-face.png' />
                             </div>
                         </div>
                         <div className='benefit-text'>
@@ -702,10 +709,17 @@ function HomePage() {
                             ? "Join thousands of families building better habits together"
                             : "انضم إلى آلاف العائلات التي تبني عادات أفضل معًا"}
                     </p>
-                    <button className='cta-button'>
+                    <a
+                        href='https://mobdeen.app.link/'
+                        target='_blank'
+                        className='cta-button'
+                        style={{
+                            textDecoration: "none",
+                        }}
+                    >
                         <Sparkles className='w-5 h-5' />
                         {language === "en" ? "Start Free Trial" : "ابدأ التجربة المجانية"}
-                    </button>
+                    </a>
                 </div>
             </section>
         </div>
