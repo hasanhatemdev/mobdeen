@@ -24,6 +24,7 @@ import {
     Eye,
     ChevronLeft,
     ChevronRight,
+    X,
 } from "lucide-react";
 
 function HomePage() {
@@ -434,6 +435,181 @@ function HomePage() {
                                 <p>{feature.description}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Pricing Comparison Section */}
+            <section className='pricing-comparison-section'>
+                <div className='pricing-container'>
+                    <div className='section-header'>
+                        <h2 className='section-title'>
+                            {language === "en" ? "Choose Your" : "اختر"}
+                            <span className='gradient-text'>
+                                {language === "en" ? " Perfect Plan" : " الخطة المثالية"}
+                            </span>
+                        </h2>
+                        <p className='section-subtitle'>
+                            {language === "en"
+                                ? "Start with 30 days free, then upgrade for premium features"
+                                : "ابدأ بـ 30 يومًا مجانًا، ثم قم بالترقية للميزات المتميزة"}
+                        </p>
+                    </div>
+
+                    <div className='pricing-table-wrapper'>
+                        <div className='pricing-table'>
+                            <div className='pricing-header'>
+                                <div className='feature-column'>{language === "en" ? "Features" : "المميزات"}</div>
+                                <div className='plan-column free-plan'>
+                                    <h3>{language === "en" ? "Free Plan" : "الخطة المجانية"}</h3>
+                                    <p>{language === "en" ? "30 Days" : "30 يومًا"}</p>
+                                </div>
+                                <div className='plan-column paid-plan'>
+                                    <h3>{language === "en" ? "Premium Plan" : "الخطة المميزة"}</h3>
+                                    <p>{language === "en" ? "365 AED / Year" : "365 درهم / سنة"}</p>
+                                    <span className='price-tag'>
+                                        {language === "en" ? "Just 1 AED/day" : "فقط 1 درهم/يوم"}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className='pricing-features'>
+                                <div className='feature-row'>
+                                    <div className='feature-name'>
+                                        <span className='feature-icon'>🧠</span>
+                                        {language === "en"
+                                            ? "Detailed behavioral reports & insights"
+                                            : "تقارير ورؤى سلوكية مفصلة"}
+                                    </div>
+                                    <div className='feature-availability free'>
+                                        <X className='icon-no' size={20} />
+                                    </div>
+                                    <div className='feature-availability paid'>
+                                        <CheckCircle2 className='icon-yes' size={20} />
+                                    </div>
+                                </div>
+
+                                <div className='feature-row'>
+                                    <div className='feature-name'>
+                                        <span className='feature-icon'>📩</span>
+                                        {language === "en" ? "Daily progress summary" : "ملخص التقدم اليومي"}
+                                    </div>
+                                    <div className='feature-availability free'>
+                                        <X className='icon-no' size={20} />
+                                    </div>
+                                    <div className='feature-availability paid'>
+                                        <CheckCircle2 className='icon-yes' size={20} />
+                                    </div>
+                                </div>
+
+                                <div className='feature-row'>
+                                    <div className='feature-name'>
+                                        <span className='feature-icon'>💡</span>
+                                        {language === "en" ? "Weekly educational values" : "القيم التربوية الأسبوعية"}
+                                    </div>
+                                    <div className='feature-availability free'>
+                                        <X className='icon-no' size={20} />
+                                    </div>
+                                    <div className='feature-availability paid'>
+                                        <CheckCircle2 className='icon-yes' size={20} />
+                                    </div>
+                                </div>
+
+                                <div className='feature-row'>
+                                    <div className='feature-name'>
+                                        <span className='feature-icon'>⚠️</span>
+                                        {language === "en"
+                                            ? "Educational penalties for delays"
+                                            : "العقوبات التربوية للتأخير"}
+                                    </div>
+                                    <div className='feature-availability free'>
+                                        <X className='icon-no' size={20} />
+                                    </div>
+                                    <div className='feature-availability paid'>
+                                        <CheckCircle2 className='icon-yes' size={20} />
+                                    </div>
+                                </div>
+
+                                <div className='feature-row'>
+                                    <div className='feature-name'>
+                                        <span className='feature-icon'>🔒</span>
+                                        {language === "en" ? "Automatic task locking" : "قفل المهام التلقائي"}
+                                    </div>
+                                    <div className='feature-availability free'>
+                                        <X className='icon-no' size={20} />
+                                    </div>
+                                    <div className='feature-availability paid'>
+                                        <CheckCircle2 className='icon-yes' size={20} />
+                                    </div>
+                                </div>
+
+                                <div className='feature-row'>
+                                    <div className='feature-name'>
+                                        <span className='feature-icon'>💬</span>
+                                        {language === "en" ? "In-app chat" : "المحادثة داخل التطبيق"}
+                                    </div>
+                                    <div className='feature-availability free'>
+                                        <X className='icon-no' size={20} />
+                                    </div>
+                                    <div className='feature-availability paid'>
+                                        <CheckCircle2 className='icon-yes' size={20} />
+                                    </div>
+                                </div>
+
+                                <div className='feature-row'>
+                                    <div className='feature-name'>
+                                        <span className='feature-icon'>📷</span>
+                                        {language === "en"
+                                            ? "Upload images, audio, and video"
+                                            : "رفع الصور والصوت والفيديو"}
+                                    </div>
+                                    <div className='feature-availability free'>
+                                        <X className='icon-no' size={20} />
+                                    </div>
+                                    <div className='feature-availability paid'>
+                                        <CheckCircle2 className='icon-yes' size={20} />
+                                    </div>
+                                </div>
+
+                                <div className='feature-row'>
+                                    <div className='feature-name'>
+                                        <span className='feature-icon'>📎</span>
+                                        {language === "en" ? "Attach files and documents" : "إرفاق الملفات والمستندات"}
+                                    </div>
+                                    <div className='feature-availability free'>
+                                        <X className='icon-no' size={20} />
+                                    </div>
+                                    <div className='feature-availability paid'>
+                                        <CheckCircle2 className='icon-yes' size={20} />
+                                    </div>
+                                </div>
+
+                                <div className='feature-row highlight'>
+                                    <div className='feature-name'>
+                                        <span className='feature-icon'>🛠</span>
+                                        {language === "en" ? "WhatsApp Support" : "دعم واتساب"}
+                                    </div>
+                                    <div className='feature-availability free partial'>
+                                        <span className='partial-text'>
+                                            {language === "en" ? "Trial only" : "فترة تجريبية فقط"}
+                                        </span>
+                                    </div>
+                                    <div className='feature-availability paid'>
+                                        <CheckCircle2 className='icon-yes' size={20} />
+                                        <span className='full-text'>
+                                            {language === "en" ? "All year" : "طوال السنة"}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className='pricing-cta'>
+                                <button className='cta-button pricing-button'>
+                                    <Sparkles className='w-5 h-5' />
+                                    {language === "en" ? "Start Your Free Trial" : "ابدأ تجربتك المجانية"}
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

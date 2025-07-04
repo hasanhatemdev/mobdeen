@@ -932,6 +932,100 @@ body.arabic .info-item span[dir="ltr"] {
     min-height: 100vh;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    /* Features Section Mobile */
+    .features-section,
+    .benefits-section,
+    .cta-section,
+    .security-section,
+    .features-in-action {
+        padding: 3rem 0;
+    }
+
+    .features-container,
+    .benefits-container,
+    .cta-container,
+    .features-action-container {
+        padding: 0 1rem;
+    }
+
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+        font-size: 0.9rem;
+    }
+
+    /* Benefits Section Mobile */
+    .benefit-text h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .benefit-list {
+        gap: 1rem;
+    }
+
+    .benefit-item {
+        font-size: 0.95rem;
+    }
+
+    /* Security Section Mobile */
+    .security-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .security-container h3 {
+        font-size: 1.3rem;
+    }
+
+    .security-container p {
+        font-size: 0.9rem;
+    }
+
+    /* CTA Section Mobile */
+    .cta-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .cta-container p {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+
+    .cta-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 300px;
+    }
 }
 
 .hero-section::before {
@@ -2440,6 +2534,7 @@ body.arabic .category-button:hover {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    padding: 0 1rem;
 }
 
 .mobile-screenshots::-webkit-scrollbar {
@@ -2465,6 +2560,21 @@ body.arabic .category-button:hover {
     padding: 6px;
     margin-bottom: 1rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.device-frame-mobile::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 20px;
+    background: #1a1a1a;
+    border-radius: 0 0 10px 10px;
+    z-index: 10;
 }
 
 .device-frame-mobile img {
@@ -2478,12 +2588,15 @@ body.arabic .category-button:hover {
     font-size: 1rem;
     color: #1a1a1a;
     margin-bottom: 0.25rem;
+    font-weight: 600;
 }
 
 .mobile-screenshot p {
     font-size: 0.85rem;
     color: #666;
     line-height: 1.4;
+    max-width: 200px;
+    margin: 0 auto;
 }
 
 /* CTA Section */
@@ -2491,4 +2604,258 @@ body.arabic .category-button:hover {
     background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
     padding: 6rem 0;
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    /* Features in Action - Mobile View */
+    .feature-showcase {
+        display: none;
+    }
+
+    .feature-showcase-mobile {
+        display: block;
+    }
+}
+
+/* Pricing Comparison Section */
+.pricing-comparison-section {
+    padding: 6rem 0;
+    background: #f8f9fa;
+}
+
+.pricing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.pricing-table-wrapper {
+    margin-top: 3rem;
+}
+
+.pricing-table {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    background: #f8f9fa;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.feature-column {
+    padding: 2rem;
+    font-weight: 600;
+    color: #666;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.plan-column {
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.plan-column h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+}
+
+.plan-column p {
+    color: #666;
+    margin: 0;
+}
+
+.free-plan {
+    background: #fef9e6;
+}
+
+.paid-plan {
+    background: linear-gradient(135deg, #ebbd00 0%, #ffa500 100%);
+    color: white;
+}
+
+.paid-plan h3,
+.paid-plan p {
+    color: white;
+}
+
+.price-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.pricing-features {
+    padding: 1rem 0;
+}
+
+.feature-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s;
+}
+
+.feature-row:hover {
+    background: #fafafa;
+}
+
+.feature-row.highlight {
+    background: #fef9e6;
+}
+
+.feature-name {
+    padding: 0.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.feature-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.feature-availability {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.5rem;
+    position: relative;
+}
+
+.icon-no {
+    color: #dc3545;
+}
+
+.icon-yes {
+    color: #28a745;
+}
+
+.partial-text,
+.full-text {
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
+    font-weight: 500;
+}
+
+.partial-text {
+    color: #f0ad4e;
+}
+
+.full-text {
+    color: #28a745;
+}
+
+.pricing-cta {
+    padding: 2rem;
+    text-align: center;
+    background: #f8f9fa;
+}
+
+.pricing-button {
+    background: linear-gradient(135deg, #ebbd00 0%, #ffa500 100%);
+    padding: 1rem 3rem;
+}
+
+/* Mobile Pricing Table */
+@media (max-width: 768px) {
+    .pricing-table {
+        overflow-x: auto;
+    }
+
+    .pricing-header,
+    .feature-row {
+        grid-template-columns: minmax(200px, 1fr) minmax(100px, 0.5fr) minmax(100px, 0.5fr);
+    }
+
+    .feature-column,
+    .plan-column,
+    .feature-name {
+        padding: 1rem;
+    }
+
+    .plan-column h3 {
+        font-size: 1.1rem;
+    }
+
+    .plan-column p {
+        font-size: 0.8rem;
+    }
+
+    .price-tag {
+        position: static;
+        display: block;
+        margin-top: 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    .feature-name {
+        font-size: 0.85rem;
+        gap: 0.5rem;
+    }
+
+    .feature-icon {
+        font-size: 1rem;
+    }
+
+    .partial-text,
+    .full-text {
+        display: none;
+    }
+
+    .feature-availability.partial::after {
+        content: "Trial";
+        position: absolute;
+        bottom: 5px;
+        font-size: 0.7rem;
+        color: #f0ad4e;
+    }
+
+    .feature-availability.paid.partial::after {
+        content: "All year";
+        color: #28a745;
+    }
+}
+
+@media (max-width: 480px) {
+    .pricing-header,
+    .feature-row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .feature-column,
+    .feature-name {
+        width: 100%;
+        border-bottom: 1px solid #e0e0e0;
+        background: #f8f9fa;
+        font-weight: 600;
+    }
+
+    .plan-column,
+    .feature-availability {
+        width: 50%;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    .plan-column:last-child,
+    .feature-availability:last-child {
+        border-right: none;
+    }
 }
