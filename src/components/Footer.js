@@ -132,16 +132,8 @@ function Footer() {
                                 : "احصل على التطبيق وابدأ رحلة عائلتك اليوم!"}
                         </p>
                         <div className='app-store-badges'>
-                            <img
-                                src='/images/app-store-badge.png'
-                                alt='Download on App Store'
-                                className='store-badge'
-                            />
-                            <img
-                                src='/images/google-play-badge.png'
-                                alt='Get it on Google Play'
-                                className='store-badge'
-                            />
+                            <img src='/images/apple-store.png' alt='Download on App Store' className='store-badge' />
+                            <img src='/images/google-play.png' alt='Get it on Google Play' className='store-badge' />
                         </div>
                     </div>
                 </div>
