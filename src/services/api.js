@@ -179,8 +179,22 @@ export const subscriptionService = {
         return response.data;
     },
 
-    subscribe: async (subscriptionPlanId) => {
-        const response = await api.post("/api/v1/family-subscriptions", {
+    subscribe: async (subscriptionPlanId, promoCode = null) => {
+        const payload = {
+            subscription_plan_id: subscriptionPlanId,
+        };
+
+        if (promoCode) {
+            payload.promo_code = promoCode;
+        }
+
+        const response = await api.post("/api/v1/family-subscriptions", payload);
+        return response.data;
+    },
+
+    checkPromoCode: async (promoCode, subscriptionPlanId) => {
+        const response = await api.post("/api/v1/promo-codes/check", {
+            promo_code: promoCode,
             subscription_plan_id: subscriptionPlanId,
         });
         return response.data;

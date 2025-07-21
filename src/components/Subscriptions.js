@@ -13,6 +13,12 @@ function Subscriptions() {
     const [activeTab, setActiveTab] = useState("active");
     const [showCancelModal, setShowCancelModal] = useState(false);
     const [cancelling, setCancelling] = useState(false);
+    const [showSubscribeModal, setShowSubscribeModal] = useState(false);
+    const [selectedPlan, setSelectedPlan] = useState(null);
+    const [promoCode, setPromoCode] = useState("");
+    const [promoValidation, setPromoValidation] = useState(null);
+    const [checkingPromo, setCheckingPromo] = useState(false);
+    const [promoError, setPromoError] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
     const { t, language } = useLanguage();
@@ -73,7 +79,10 @@ function Subscriptions() {
         setError("");
 
         try {
-            const response = await subscriptionService.subscribe(planId);
+            const response = await subscriptionService.subscribe(
+                planId || selectedPlan.id,
+                promoValidation?.valid ? promoCode : null
+            );
 
             // Store subscription info
             localStorage.setItem("subscription_id", response.subscription_id);
@@ -92,6 +101,48 @@ function Subscriptions() {
             setError(err.response?.data?.message || t("failedToCreateSubscription"));
             setSubscribing(false);
         }
+    };
+
+    const handleSelectPlan = (plan) => {
+        setSelectedPlan(plan);
+        setShowSubscribeModal(true);
+        setPromoCode("");
+        setPromoValidation(null);
+        setPromoError("");
+    };
+
+    const handleCheckPromoCode = async () => {
+        if (!promoCode.trim()) {
+            setPromoError(t("enterPromoCode") || "Please enter a promo code");
+            return;
+        }
+
+        setCheckingPromo(true);
+        setPromoError("");
+        setPromoValidation(null);
+
+        try {
+            const response = await subscriptionService.checkPromoCode(promoCode, selectedPlan.id);
+
+            if (response.valid) {
+                setPromoValidation(response);
+                setPromoError("");
+            } else {
+                setPromoError(t("invalidPromoCode") || "Invalid promo code");
+                setPromoValidation(null);
+            }
+        } catch (err) {
+            setPromoError(t("promoCheckFailed") || "Failed to check promo code");
+            setPromoValidation(null);
+        } finally {
+            setCheckingPromo(false);
+        }
+    };
+
+    const handleRemovePromo = () => {
+        setPromoCode("");
+        setPromoValidation(null);
+        setPromoError("");
     };
 
     const handleCancelSubscription = async () => {
@@ -212,7 +263,7 @@ function Subscriptions() {
                             {plan.discount_percent > 0 ? (
                                 <>
                                     <span className='original-price'>${plan.price / 100}</span>
-                                    <span className='discounted-price'>${plan.discounted_price / 100}</span>
+                                    <span className='discounted-price'>${(plan.discounted_price || 0) / 100}</span>
                                     <span className='discount-badge'>
                                         {t("discount")} {plan.discount_percent}%
                                     </span>
@@ -237,16 +288,14 @@ function Subscriptions() {
 
                         <button
                             className='select-plan-btn'
-                            onClick={() => handleSubscribe(plan.id)}
+                            onClick={() => handleSelectPlan(plan)}
                             disabled={subscribing || hasPaidPremium}
                         >
                             {hasPaidPremium
                                 ? t("yourCurrentPlan")
                                 : subscribing
                                 ? t("processing")
-                                : currentSubscription?.is_trial_period
-                                ? t("upgradeFromTrial")
-                                : t("subscribeNow")}
+                                : t("selectPlan") || "Select Plan"}
                         </button>
                     </div>
                 ))}
@@ -306,6 +355,208 @@ function Subscriptions() {
                     </h3>
                     {renderUpgradePlans()}
                 </>
+            )}
+
+            {/* Subscribe Modal */}
+            {showSubscribeModal && selectedPlan && (
+                <div className='modal-overlay' onClick={() => setShowSubscribeModal(false)}>
+                    <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+                        <div className='modal-header'>
+                            <h3>{t("subscribeToPlan") || "Subscribe to Plan"}</h3>
+                            <button className='modal-close' onClick={() => setShowSubscribeModal(false)}>
+                                ×
+                            </button>
+                        </div>
+                        <div className='modal-body'>
+                            <div style={{ marginBottom: "25px" }}>
+                                <h4 style={{ fontSize: "24px", color: "#1a1a1a", marginBottom: "10px" }}>
+                                    {selectedPlan.name}
+                                </h4>
+                                <p style={{ color: "#666", marginBottom: "20px" }}>{selectedPlan.description}</p>
+
+                                <div style={{ background: "#f8f9fa", borderRadius: "10px", padding: "20px" }}>
+                                    {promoValidation?.valid ? (
+                                        <>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "space-between",
+                                                    marginBottom: "10px",
+                                                }}
+                                            >
+                                                <span style={{ color: "#666" }}>
+                                                    {t("originalPrice") || "Original Price"}:
+                                                </span>
+                                                <span style={{ textDecoration: "line-through", color: "#999" }}>
+                                                    ${selectedPlan.price / 100}
+                                                </span>
+                                            </div>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "space-between",
+                                                    marginBottom: "10px",
+                                                    color: "#28a745",
+                                                }}
+                                            >
+                                                <span>{t("discount") || "Discount"}:</span>
+                                                <span style={{ fontWeight: "600" }}>
+                                                    -{promoValidation.total_discount}%
+                                                </span>
+                                            </div>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "space-between",
+                                                    fontSize: "20px",
+                                                    fontWeight: "600",
+                                                    paddingTop: "10px",
+                                                    borderTop: "1px solid #e0e0e0",
+                                                }}
+                                            >
+                                                <span>{t("youPay") || "You Pay"}:</span>
+                                                <span style={{ color: "#ebbd00" }}>
+                                                    ${promoValidation.discounted_price / 100}
+                                                </span>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                justifyContent: "space-between",
+                                                fontSize: "20px",
+                                                fontWeight: "600",
+                                            }}
+                                        >
+                                            <span>{t("price") || "Price"}:</span>
+                                            <span style={{ color: "#ebbd00" }}>
+                                                $
+                                                {selectedPlan.discount_percent > 0
+                                                    ? selectedPlan.discounted_price / 100
+                                                    : selectedPlan.price / 100}
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div>
+                                <label
+                                    style={{ display: "block", marginBottom: "10px", fontWeight: "600", color: "#333" }}
+                                >
+                                    {t("havePromoCode") || "Have a promo code?"}
+                                </label>
+                                <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+                                    <input
+                                        type='text'
+                                        placeholder={t("enterPromoCode") || "Enter promo code"}
+                                        value={promoCode}
+                                        onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                                        disabled={promoValidation?.valid || checkingPromo}
+                                        onKeyPress={(e) => e.key === "Enter" && handleCheckPromoCode()}
+                                        style={{
+                                            flex: 1,
+                                            padding: "12px 16px",
+                                            border: "2px solid #e0e0e0",
+                                            borderRadius: "8px",
+                                            fontSize: "16px",
+                                            textTransform: "uppercase",
+                                            backgroundColor: promoValidation?.valid ? "#f8f9fa" : "white",
+                                        }}
+                                    />
+                                    {!promoValidation?.valid ? (
+                                        <button
+                                            onClick={handleCheckPromoCode}
+                                            disabled={checkingPromo || !promoCode.trim()}
+                                            style={{
+                                                padding: "12px 24px",
+                                                backgroundColor:
+                                                    checkingPromo || !promoCode.trim() ? "#e0e0e0" : "#ebbd00",
+                                                color: checkingPromo || !promoCode.trim() ? "#999" : "black",
+                                                border: "none",
+                                                borderRadius: "8px",
+                                                fontSize: "16px",
+                                                fontWeight: "600",
+                                                cursor: checkingPromo || !promoCode.trim() ? "not-allowed" : "pointer",
+                                                minWidth: "100px",
+                                            }}
+                                        >
+                                            {checkingPromo ? t("checking") || "Checking..." : t("apply") || "Apply"}
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={handleRemovePromo}
+                                            style={{
+                                                padding: "12px 24px",
+                                                backgroundColor: "#dc3545",
+                                                color: "white",
+                                                border: "none",
+                                                borderRadius: "8px",
+                                                fontSize: "16px",
+                                                fontWeight: "600",
+                                                cursor: "pointer",
+                                                minWidth: "100px",
+                                            }}
+                                        >
+                                            {t("remove") || "Remove"}
+                                        </button>
+                                    )}
+                                </div>
+
+                                {promoError && (
+                                    <p style={{ color: "#dc3545", fontSize: "14px", marginTop: "8px" }}>{promoError}</p>
+                                )}
+
+                                {promoValidation?.valid && (
+                                    <p
+                                        style={{
+                                            color: "#28a745",
+                                            fontSize: "14px",
+                                            marginTop: "8px",
+                                            fontWeight: "500",
+                                        }}
+                                    >
+                                        ✅ {t("promoApplied") || "Promo code applied!"} {t("youSave") || "You save"}{" "}
+                                        {promoValidation.total_discount}%
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                        <div className='modal-footer'>
+                            <button
+                                className='modal-btn modal-btn-secondary'
+                                onClick={() => setShowSubscribeModal(false)}
+                                disabled={subscribing}
+                            >
+                                {t("cancel") || "Cancel"}
+                            </button>
+                            <button
+                                className='modal-btn'
+                                onClick={() => handleSubscribe()}
+                                disabled={subscribing}
+                                style={{
+                                    backgroundColor: subscribing ? "#ccc" : "#ebbd00",
+                                    color: "black",
+                                    fontWeight: "600",
+                                }}
+                            >
+                                {subscribing ? (
+                                    t("processing") || "Processing..."
+                                ) : (
+                                    <>
+                                        {t("subscribeNow") || "Subscribe Now"} - $
+                                        {promoValidation?.valid
+                                            ? promoValidation.discounted_price / 100
+                                            : selectedPlan.discount_percent > 0
+                                            ? selectedPlan.discounted_price / 100
+                                            : selectedPlan.price / 100}
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
 
             {/* Cancellation Modal */}
