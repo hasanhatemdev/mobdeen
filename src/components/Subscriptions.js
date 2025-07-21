@@ -388,7 +388,7 @@ function Subscriptions() {
                                                     {t("originalPrice") || "Original Price"}:
                                                 </span>
                                                 <span style={{ textDecoration: "line-through", color: "#999" }}>
-                                                    ${selectedPlan.price / 100}
+                                                    ${(promoValidation.original_price || selectedPlan.price) / 100}
                                                 </span>
                                             </div>
                                             <div
@@ -416,10 +416,7 @@ function Subscriptions() {
                                             >
                                                 <span>{t("youPay") || "You Pay"}:</span>
                                                 <span style={{ color: "#ebbd00" }}>
-                                                    $
-                                                    {selectedPlan.discount_percent > 0
-                                                        ? (selectedPlan.discounted_price || 0) / 100
-                                                        : plan.price / 100}
+                                                    ${(promoValidation.discounted_price || 0) / 100}
                                                 </span>
                                             </div>
                                         </>
@@ -436,7 +433,7 @@ function Subscriptions() {
                                             <span style={{ color: "#ebbd00" }}>
                                                 $
                                                 {selectedPlan.discount_percent > 0
-                                                    ? selectedPlan.discounted_price / 100
+                                                    ? (selectedPlan.discounted_price || 0) / 100
                                                     : selectedPlan.price / 100}
                                             </span>
                                         </div>
@@ -455,7 +452,7 @@ function Subscriptions() {
                                         type='text'
                                         placeholder={t("enterPromoCode") || "Enter promo code"}
                                         value={promoCode}
-                                        onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                                        onChange={(e) => setPromoCode(e.target.value)}
                                         disabled={promoValidation?.valid || checkingPromo}
                                         onKeyPress={(e) => e.key === "Enter" && handleCheckPromoCode()}
                                         style={{
@@ -464,7 +461,6 @@ function Subscriptions() {
                                             border: "2px solid #e0e0e0",
                                             borderRadius: "8px",
                                             fontSize: "16px",
-                                            textTransform: "uppercase",
                                             backgroundColor: promoValidation?.valid ? "#f8f9fa" : "white",
                                         }}
                                     />
