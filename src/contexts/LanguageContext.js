@@ -88,6 +88,9 @@ const translations = {
         feature5Desc: "Children earn virtual cookies for completing tasks, motivating continuous improvement",
         feature6Title: "Visual Learning",
         feature6Desc: "Tasks presented visually to help nonverbal or language-delayed children understand easily",
+        trialDescription:
+            "You have access to all premium features during your trial period. Upgrade anytime to continue enjoying these features after your trial ends.",
+        selectPlan: "Select Plan",
 
         // How It Works Section
         howItWorksTitle: "How It Works",
@@ -586,6 +589,10 @@ const translations = {
         emailSupport: "الدعم عبر البريد",
         phoneSupport: "اتصل بنا",
         footerRights: "© 2025 مبدعين. جميع الحقوق محفوظة.",
+
+        trialDescription:
+            "لديك وصول إلى جميع الميزات المميزة خلال فترة التجربة. قم بالترقية في أي وقت للاستمرار في الاستمتاع بهذه الميزات بعد انتهاء الفترة التجريبية.",
+        selectPlan: "اختر الخطة",
 
         // Login
         enterEmail: "أدخل بريدك الإلكتروني",

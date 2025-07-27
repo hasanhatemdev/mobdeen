@@ -6,6 +6,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 function Subscriptions() {
     const [availablePlans, setAvailablePlans] = useState([]);
     const [currentSubscription, setCurrentSubscription] = useState(null);
+    const [userSubscribedPlan, setUserSubscribedPlan] = useState(null);
     const [loading, setLoading] = useState(true);
     const [subscribing, setSubscribing] = useState(false);
     const [error, setError] = useState("");
@@ -41,6 +42,7 @@ function Subscriptions() {
         }
     }, [location, t]);
 
+    // Update the loadData function to NOT match plans during trial:
     const loadData = async () => {
         setLoading(true);
         setError("");
@@ -59,6 +61,25 @@ function Subscriptions() {
             const featuresResponse = await subscriptionService.getCurrentSubscriptionFeatures();
             console.log("Features API Response:", featuresResponse);
             setCurrentSubscription(featuresResponse);
+
+            // Only match plans if user has a PAID subscription, not trial
+            if (
+                featuresResponse &&
+                featuresResponse.features &&
+                featuresResponse.is_paid_plan &&
+                !featuresResponse.is_trial_period &&
+                plansResponse.plans &&
+                plansResponse.plans.data
+            ) {
+                // Find which plan matches the user's features
+                const subscribedPlan = plansResponse.plans.data.find((plan) => {
+                    return featuresResponse.features.every((feature) => plan.features.includes(feature));
+                });
+
+                if (subscribedPlan) {
+                    setUserSubscribedPlan(subscribedPlan);
+                }
+            }
 
             // If user has a subscription, show active tab
             if (featuresResponse && (featuresResponse.is_paid_plan || featuresResponse.is_trial_period)) {
@@ -180,27 +201,54 @@ function Subscriptions() {
             );
         }
 
-        const subscriptionType = currentSubscription.is_trial_period ? t("trialPeriod") : t("premiumPlan");
+        const isTrialPeriod = currentSubscription.is_trial_period;
         const daysInfo = currentSubscription.trial_days_remaining
-            ? language === "ar"
-                ? `${currentSubscription.trial_days_remaining} ${t("days")}`
-                : `${currentSubscription.trial_days_remaining} ${t("days")}`
+            ? `${currentSubscription.trial_days_remaining} ${t("days")}`
             : "";
 
         return (
             <div className='active-subscription-card'>
                 <div className='subscription-header'>
-                    <h3>{subscriptionType}</h3>
-                    {currentSubscription.is_paid_plan && !currentSubscription.is_trial_period && (
+                    <h3>{isTrialPeriod ? t("trialPeriod") : userSubscribedPlan?.name || t("premiumPlan")}</h3>
+                    {currentSubscription.is_paid_plan && !isTrialPeriod && (
                         <span className='paid-badge'>{t("paid")}</span>
                     )}
                 </div>
 
                 <div className='subscription-details'>
-                    {daysInfo && (
-                        <p className='expiry-info'>
-                            <strong>{t("remaining")}:</strong> {daysInfo}
-                        </p>
+                    {/* Show trial days or plan description */}
+                    {isTrialPeriod ? (
+                        <>
+                            {daysInfo && (
+                                <p className='expiry-info'>
+                                    <strong>{t("remaining")}:</strong> {daysInfo}
+                                </p>
+                            )}
+                            <p style={{ color: "#666", marginTop: "10px" }}>
+                                {t("trialDescription") || "You have access to all features during your trial period"}
+                            </p>
+                        </>
+                    ) : (
+                        <>
+                            {userSubscribedPlan && (
+                                <>
+                                    <p style={{ color: "#666", marginBottom: "20px" }}>
+                                        {userSubscribedPlan.description}
+                                    </p>
+                                    <div
+                                        style={{
+                                            background: "#f8f9fa",
+                                            borderRadius: "10px",
+                                            padding: "15px",
+                                            marginBottom: "20px",
+                                        }}
+                                    >
+                                        <strong>{t("price")}:</strong> ${userSubscribedPlan.price / 100}/
+                                        {t(userSubscribedPlan.billing_interval)}
+                                    </div>
+                                </>
+                            )}
+                        </>
                     )}
                 </div>
 
@@ -209,15 +257,15 @@ function Subscriptions() {
                     <ul>
                         {currentSubscription.features.map((feature, index) => (
                             <li key={index}>
-                                <img src='/images/icons/check.svg' alt='check' />
-                                {translateFeature(feature)}
+                                <img src='/images/icons/check.svg' alt='✓' />
+                                <span>{translateFeature(feature)}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
 
                 <div className='subscription-actions'>
-                    {currentSubscription.is_trial_period ? (
+                    {isTrialPeriod ? (
                         <button onClick={() => setActiveTab("upgrade")} className='upgrade-btn'>
                             {t("upgradeFromTrial")}
                         </button>
@@ -237,9 +285,6 @@ function Subscriptions() {
     };
 
     const renderUpgradePlans = () => {
-        console.log("renderUpgradePlans - availablePlans:", availablePlans);
-        console.log("availablePlans length:", availablePlans.length);
-
         if (!availablePlans || availablePlans.length === 0) {
             return (
                 <div className='no-subscription'>
@@ -248,57 +293,58 @@ function Subscriptions() {
             );
         }
 
-        // Check if user already has a paid premium subscription
-        const hasPaidPremium =
-            currentSubscription && currentSubscription.is_paid_plan && !currentSubscription.is_trial_period;
-
         return (
             <div className='plans-grid'>
-                {availablePlans.map((plan) => (
-                    <div key={plan.id} className='plan-card'>
-                        <h3>{plan.name}</h3>
-                        <p className='description'>{plan.description}</p>
+                {availablePlans.map((plan) => {
+                    // Move isCurrentPlan inside the map function
+                    const isCurrentPlan = userSubscribedPlan && userSubscribedPlan.id === plan.id;
 
-                        <div className='price-section'>
-                            {plan.discount_percent > 0 ? (
-                                <>
-                                    <span className='original-price'>${plan.price / 100}</span>
-                                    <span className='discounted-price'>${(plan.discounted_price || 0) / 100}</span>
-                                    <span className='discount-badge'>
-                                        {t("discount")} {plan.discount_percent}%
-                                    </span>
-                                </>
-                            ) : (
-                                <span className='price'>${plan.price}</span>
-                            )}
-                            <span className='billing-cycle'>/{t(plan.billing_interval)}</span>
+                    return (
+                        <div key={plan.id} className='plan-card'>
+                            <h3>{plan.name}</h3>
+                            <p className='description'>{plan.description}</p>
+
+                            <div className='price-section'>
+                                {plan.discount_percent > 0 ? (
+                                    <>
+                                        <span className='original-price'>${plan.price / 100}</span>
+                                        <span className='discounted-price'>${(plan.discounted_price || 0) / 100}</span>
+                                        <span className='discount-badge'>
+                                            {t("discount")} {plan.discount_percent}%
+                                        </span>
+                                    </>
+                                ) : (
+                                    <span className='price'>${plan.price / 100}</span>
+                                )}
+                                <span className='billing-cycle'>/{t(plan.billing_interval)}</span>
+                            </div>
+
+                            <div className='features'>
+                                <h4>{t("features")}:</h4>
+                                <ul>
+                                    {plan.features.map((feature, index) => (
+                                        <li key={index}>
+                                            <img src='/images/icons/check.svg' alt='✓' />
+                                            <span>{translateFeature(feature)}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <button
+                                className='select-plan-btn'
+                                onClick={() => handleSelectPlan(plan)}
+                                disabled={subscribing || isCurrentPlan}
+                            >
+                                {isCurrentPlan
+                                    ? t("yourCurrentPlan")
+                                    : subscribing
+                                    ? t("processing")
+                                    : t("selectPlan") || "Select Plan"}
+                            </button>
                         </div>
-
-                        <div className='features'>
-                            <h4>{t("features")}:</h4>
-                            <ul>
-                                {plan.features.map((feature, index) => (
-                                    <li key={index}>
-                                        <img src='/images/icons/check.svg' alt='check' />
-                                        {translateFeature(feature)}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <button
-                            className='select-plan-btn'
-                            onClick={() => handleSelectPlan(plan)}
-                            disabled={subscribing || hasPaidPremium}
-                        >
-                            {hasPaidPremium
-                                ? t("yourCurrentPlan")
-                                : subscribing
-                                ? t("processing")
-                                : t("selectPlan") || "Select Plan"}
-                        </button>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         );
     };
