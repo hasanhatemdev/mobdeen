@@ -140,6 +140,9 @@ const translations = {
         // Social Links
         followUs: "Connect With Us",
 
+        promoNotValidForPlan: "This promo code is not valid for this plan",
+        promoRequiresADNOCEmail: "This promo code requires an ADNOC email address",
+
         // Footer
         footerTagline: "Empowering families to raise creative, responsible children through smart technology",
         footerProduct: "Product",
@@ -499,6 +502,9 @@ const translations = {
         floatingCard1: "تمت المهمة!",
         floatingCard2: "10 نقاط مكتسبة",
         floatingCard3: "التقدم الأسبوعي",
+
+        promoNotValidForPlan: "رمز الخصم هذا غير صالح لهذه الخطة",
+        promoRequiresADNOCEmail: "يتطلب رمز الخصم هذا بريد إلكتروني من ADNOC",
 
         // Who Uses Section
         whoUsesTitle: "من يستخدم مبدعين؟",

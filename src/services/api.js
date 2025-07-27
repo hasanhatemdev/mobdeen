@@ -192,11 +192,18 @@ export const subscriptionService = {
         return response.data;
     },
 
-    checkPromoCode: async (promoCode, subscriptionPlanId) => {
-        const response = await api.post("/api/v1/promo-codes/check", {
+    checkPromoCode: async (promoCode, subscriptionPlanId, userEmail = null) => {
+        const payload = {
             promo_code: promoCode,
             subscription_plan_id: subscriptionPlanId,
-        });
+        };
+
+        // Include email if provided
+        if (userEmail) {
+            payload.user_email = userEmail;
+        }
+
+        const response = await api.post("/api/v1/promo-codes/check", payload);
         return response.data;
     },
 

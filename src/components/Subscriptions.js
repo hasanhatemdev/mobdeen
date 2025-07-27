@@ -20,6 +20,7 @@ function Subscriptions() {
     const [promoValidation, setPromoValidation] = useState(null);
     const [checkingPromo, setCheckingPromo] = useState(false);
     const [promoError, setPromoError] = useState("");
+    const [userEmail, setUserEmail] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
     const { t, language } = useLanguage();
@@ -41,6 +42,14 @@ function Subscriptions() {
             window.history.replaceState({}, document.title, location.pathname);
         }
     }, [location, t]);
+
+    useEffect(() => {
+        // Get user email from localStorage
+        const email = localStorage.getItem("user_email");
+        if (email) {
+            setUserEmail(email);
+        }
+    }, []);
 
     // Update the loadData function to NOT match plans during trial:
     const loadData = async () => {
@@ -138,12 +147,32 @@ function Subscriptions() {
             return;
         }
 
+        // Special validation for ADNOC coupon
+        if (promoCode.toUpperCase() === "ADNOC-LS") {
+            // Check if it's the ADNOC plan
+            if (selectedPlan.id !== "36cc4840-dc6e-4db9-86e4-c3d568e03d4f") {
+                setPromoError(t("promoNotValidForPlan") || "This promo code is not valid for this plan");
+                return;
+            }
+
+            // Check if user has @adnoc.ae email
+            if (!userEmail || !userEmail.toLowerCase().endsWith("@adnoc.ae")) {
+                setPromoError(t("promoRequiresADNOCEmail") || "This promo code requires an ADNOC email address");
+                return;
+            }
+        }
+
         setCheckingPromo(true);
         setPromoError("");
         setPromoValidation(null);
 
         try {
-            const response = await subscriptionService.checkPromoCode(promoCode, selectedPlan.id);
+            // Pass email along with the promo code check
+            const response = await subscriptionService.checkPromoCode(
+                promoCode,
+                selectedPlan.id,
+                userEmail // Add email parameter
+            );
 
             if (response.valid) {
                 setPromoValidation(response);

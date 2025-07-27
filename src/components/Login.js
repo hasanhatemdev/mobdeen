@@ -33,6 +33,7 @@ function Login() {
             localStorage.setItem("refresh_token", response.refresh_token);
             localStorage.setItem("user_id", response.id);
             localStorage.setItem("user_role", response.role);
+            localStorage.setItem("user_email", credentials.email);
 
             // Redirect to subscriptions page
             navigate("/subscriptions");
