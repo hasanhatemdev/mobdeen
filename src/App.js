@@ -29,6 +29,17 @@ function App() {
     useEffect(() => {
         // Check if user is authenticated on component mount
         const token = localStorage.getItem("access_token");
+        const userEmail = localStorage.getItem("user_email");
+
+        if (token && !userEmail) {
+            console.log("No email found, forcing logout...");
+            localStorage.clear();
+            setIsAuthenticated(false);
+            setLoading(false);
+            // Don't need window.location.href, let React Router handle it
+            return;
+        }
+
         setIsAuthenticated(!!token);
         setLoading(false);
     }, []);
