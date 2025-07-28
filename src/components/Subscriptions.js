@@ -71,19 +71,17 @@ function Subscriptions() {
             console.log("Features API Response:", featuresResponse);
             setCurrentSubscription(featuresResponse);
 
-            // Only match plans if user has a PAID subscription, not trial
+            // If user has a paid plan with plan_id, find the matching plan
             if (
                 featuresResponse &&
-                featuresResponse.features &&
                 featuresResponse.is_paid_plan &&
                 !featuresResponse.is_trial_period &&
+                featuresResponse.plan_id &&
                 plansResponse.plans &&
                 plansResponse.plans.data
             ) {
-                // Find which plan matches the user's features
-                const subscribedPlan = plansResponse.plans.data.find((plan) => {
-                    return featuresResponse.features.every((feature) => plan.features.includes(feature));
-                });
+                // Find the plan by ID instead of matching features
+                const subscribedPlan = plansResponse.plans.data.find((plan) => plan.id === featuresResponse.plan_id);
 
                 if (subscribedPlan) {
                     setUserSubscribedPlan(subscribedPlan);
@@ -238,7 +236,11 @@ function Subscriptions() {
         return (
             <div className='active-subscription-card'>
                 <div className='subscription-header'>
-                    <h3>{isTrialPeriod ? t("trialPeriod") : userSubscribedPlan?.name || t("premiumPlan")}</h3>
+                    <h3>
+                        {isTrialPeriod
+                            ? t("trialPeriod")
+                            : currentSubscription.plan_name || userSubscribedPlan?.name || t("premiumPlan")}
+                    </h3>
                     {currentSubscription.is_paid_plan && !isTrialPeriod && (
                         <span className='paid-badge'>{t("paid")}</span>
                     )}
@@ -259,23 +261,21 @@ function Subscriptions() {
                         </>
                     ) : (
                         <>
+                            <p style={{ color: "#666", marginBottom: "20px" }}>
+                                {currentSubscription.plan_description || userSubscribedPlan?.description}
+                            </p>
                             {userSubscribedPlan && (
-                                <>
-                                    <p style={{ color: "#666", marginBottom: "20px" }}>
-                                        {userSubscribedPlan.description}
-                                    </p>
-                                    <div
-                                        style={{
-                                            background: "#f8f9fa",
-                                            borderRadius: "10px",
-                                            padding: "15px",
-                                            marginBottom: "20px",
-                                        }}
-                                    >
-                                        <strong>{t("price")}:</strong> ${userSubscribedPlan.price / 100}/
-                                        {t(userSubscribedPlan.billing_interval)}
-                                    </div>
-                                </>
+                                <div
+                                    style={{
+                                        background: "#f8f9fa",
+                                        borderRadius: "10px",
+                                        padding: "15px",
+                                        marginBottom: "20px",
+                                    }}
+                                >
+                                    <strong>{t("price")}:</strong> ${userSubscribedPlan.price / 100}/
+                                    {t(userSubscribedPlan.billing_interval)}
+                                </div>
                             )}
                         </>
                     )}
